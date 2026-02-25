@@ -130,7 +130,7 @@
                                FontSize="20"
                                FontWeight="Medium"
                                HorizontalAlignment="Center"/>
-                    <TextBlock Text="Luis Aarón González Macias 4° B"
+                    <TextBlock Text="Aba-Inventory"
                                Foreground="LightCyan"
                                FontSize="12"
                                FontWeight="Medium"
@@ -162,7 +162,7 @@
                     <customcontrol:BindablePasswordBox
                         Height="28"
                         Margin="0,5,0,0">
-
+                        
                     </customcontrol:BindablePasswordBox>
                     <Button x:Name="btnLogin"
                             BorderThickness="0"
