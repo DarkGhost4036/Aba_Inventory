@@ -112,13 +112,5 @@
     <Folder Include="Model\" />
     <Folder Include="Viewmodel\" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Cafe.jpg" />
-    <Resource Include="Images\icon.png" />
-    <Resource Include="Images\imagen.png" />
-    <Resource Include="Images\key-icon.png" />
-    <Resource Include="Images\Manhattan_Cafe.jpg" />
-    <Resource Include="Images\user-icon.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
