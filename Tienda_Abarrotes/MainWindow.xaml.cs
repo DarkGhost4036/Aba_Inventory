@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Tienda_Abarrotes
+namespace ProyectoUnoEsco
 {
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml

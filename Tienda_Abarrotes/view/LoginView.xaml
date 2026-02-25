@@ -1,0 +1,205 @@
+﻿<Window x:Class="Proyecto1Esco.View.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Proyecto1Esco.View"
+        xmlns:customcontrol="clr-namespace:Proyecto1Esco.CustomControl"
+        mc:Ignorable="d"
+        Title="Inicio de Sesion" Height="550" Width="800"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Border CornerRadius="12">
+        <Border.Background>
+            <ImageBrush ImageSource="/Images/Manhattan_Cafe.jpg"
+                        Stretch="None"/>
+        </Border.Background>
+        <Border CornerRadius="10" BorderThickness="2"
+                Opacity="0.95" Margin="0 0 0 -44">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0"
+                                     EndPoint="1,1">
+                    <GradientStop Color="#462ad8" Offset="0"/>
+                    <GradientStop Color="#da34ae" Offset="0.75"/>
+                    <GradientStop Color="#8a16c1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0"
+                                     EndPoint="1,1">
+                    <GradientStop Color="#65148C" Offset="0"/>
+                    <GradientStop Color="#C470EB" Offset="0.55"/>
+                    <GradientStop Color="#F6E9FC" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Login"
+                               Foreground="AntiqueWhite"
+                               FontSize="15"
+                               Grid.Column="0"
+                               VerticalAlignment="Center"
+                               Margin="10,0,0,0"/>
+                    <Button x:Name="btnMinimizar"
+                            BorderThickness="0"
+                            Content="-"
+                            Foreground="White"
+                            FontSize="16"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Click="btnMinimizar_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background"
+                                        Value="#8509C8"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Background"
+                                                Value="#68079C"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate> 
+                        </Button.Template>
+                    </Button>
+
+                    <Button x:Name="btnCerrar"
+                                BorderThickness="0"
+                                Content="X"
+                                Foreground="White"
+                                FontSize="16"
+                                Cursor="Hand"
+                                Grid.Column="2"
+                                Click="btnCerrar_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background"
+                                        Value="Crimson"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                            Value="True">
+                                        <Setter Property="Background"
+                                                Value="DeepPink"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="center"
+                                                        HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+                <StackPanel Width="220"
+                            Grid.Row="1"
+                            Orientation="Vertical"
+                            Margin="0,35,0,0">
+                    <Image Source="/Images/Cafe.jpg"
+                           Width="100"
+                           Height="100"/>
+                    <TextBlock Text="Ingenieria de Software"
+                               Foreground="White"
+                               FontSize="20"
+                               FontWeight="Medium"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Luis Aarón González Macias 4° B"
+                               Foreground="LightCyan"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               Margin="0,5,0,0"/>
+                    <TextBox x:Name="txtUser"
+                             FontSize="13"
+                             FontWeight="Medium"
+                             Foreground="White"
+                             CaretBrush="LightGray"
+                             BorderBrush="DarkGray"
+                             BorderThickness="0,0,0,2"
+                             Height="28"
+                             VerticalContentAlignment="Center"
+                             Margin="0,5,0,0"
+                             Padding="20,0,0,0">
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="/Images/user-icon.png"
+                                        Stretch="None"
+                                        AlignmentX="Left"/>
+                        </TextBox.Background>
+                    </TextBox>
+                    <TextBlock Text="Password"
+                               Foreground="LightGray"
+                               FontSize="15"
+                               FontWeight="Medium"
+                               Margin="0,15,0,0"/>
+                    <customcontrol:BindablePasswordBox
+                        Height="28"
+                        Margin="0,5,0,0">
+
+                    </customcontrol:BindablePasswordBox>
+                    <Button x:Name="btnLogin"
+                            BorderThickness="0"
+                            Content="Login"
+                            Foreground="White"
+                            FontSize="16"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Click="btnLogin_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background"
+                                        Value="Purple"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                            Value="True">
+                                        <Setter Property="Background"
+                                                Value="MediumPurple"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="100" Height="25"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Top"
+                                                    HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Border>
+</Window>
+
+    
