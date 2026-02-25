@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Proyecto1Esco.View
+namespace Tienda_Abarrotes.View
 {
     /// <summary>
     /// Lógica de interacción para LoginView.xaml
