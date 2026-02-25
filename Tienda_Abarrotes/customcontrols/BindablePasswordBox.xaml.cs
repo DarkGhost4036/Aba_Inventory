@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Proyecto1Esco.CustomControl
+namespace Tienda_Abarrotes.customcontrols
 {
     /// <summary>
     /// Lógica de interacción para BindablePasswordBox.xaml
