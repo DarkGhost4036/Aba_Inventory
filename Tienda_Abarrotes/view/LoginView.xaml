@@ -130,7 +130,7 @@
                                FontSize="20"
                                FontWeight="Medium"
                                HorizontalAlignment="Center"/>
-                    <TextBlock Text="Luis Aarón González Macias 4° B"
+                    <TextBlock Text="Aba-Inventory"
                                Foreground="LightCyan"
                                FontSize="12"
                                FontWeight="Medium"
