@@ -1,4 +1,4 @@
-﻿using ProyectoUnoEsco.View;
+﻿using Tienda_Abarrotes.View;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
