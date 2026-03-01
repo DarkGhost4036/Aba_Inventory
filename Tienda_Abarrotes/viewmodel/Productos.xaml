@@ -1,0 +1,12 @@
+<Application x:Class="AbaInventory.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:AbaInventory.Converters"
+             StartupUri="Views/Productos.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <converters:StatusToColorConverter x:Key="StatusToColorConverter"/>
+            <converters:PluralizeConverter x:Key="PluralizeConverter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
