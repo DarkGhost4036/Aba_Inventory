@@ -121,7 +121,7 @@
                 <StackPanel Width="220"
                             Grid.Row="1"
                             Orientation="Vertical"
-                            Margin="0,35,0,0">
+                            Margin="0,50,500,0">
                     <Image Source="/Images/icon.png"
                            Width="100"
                            Height="100"/>
@@ -196,6 +196,49 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
+                </StackPanel>
+                <StackPanel Width="220"
+                            Grid.Row="1"
+                            Orientation="Vertical"
+                            Margin="500,50,0,0">
+                    <Image Source="/Images/icon.png"
+                           Width="100"
+                           Height="100"/>
+                    <TextBlock Text="Ingenieria de Software"
+                               Foreground="White"
+                               FontSize="20"
+                               FontWeight="Medium"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Aba-Inventory"
+                               Foreground="LightCyan"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               Margin="0,5,0,0"/>
+                    <TextBox x:Name="txtPanel"
+                             FontSize="13"
+                             FontWeight="Medium"
+                             Foreground="White"
+                             CaretBrush="LightGray"
+                             BorderBrush="DarkGray"
+                             BorderThickness="0,0,0,2"
+                             Height="28"
+                             VerticalContentAlignment="Center"
+                             Margin="0,5,0,0"
+                             Padding="20,0,0,0">    
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="/Images/user-icon.png"
+                                        Stretch="None"
+                                        AlignmentX="Left"/>
+                        </TextBox.Background>
+                    </TextBox>
+                    <TextBlock Text="Password"
+                               Foreground="LightGray"
+                               FontSize="15"
+                               FontWeight="Medium"
+                               Margin="0,15,0,0"/>  
+                    
                 </StackPanel>
             </Grid>
         </Border>
