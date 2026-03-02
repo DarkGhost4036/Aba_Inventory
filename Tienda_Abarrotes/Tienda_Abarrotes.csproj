@@ -58,8 +58,13 @@
     <Compile Include="customcontrols\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Producto.cs" />
+    <Compile Include="Viewmodel\ProductoViewModel.cs" />
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Productos.xaml.cs">
+      <DependentUpon>Productos.xaml</DependentUpon>
     </Compile>
     <Page Include="customcontrols\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
@@ -69,7 +74,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Viewmodel\Productos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Productos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -101,8 +114,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="Viewmodel\" />
+    <Resource Include="Images\cocaSinAzucar.png" />
+    <Resource Include="Images\donasBimbo.png" />
+    <Resource Include="Images\pepsi.png" />
+    <Resource Include="Images\sabritasOriginales.png" />
+    <Resource Include="Images\sabritones.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Cafe.jpg" />
