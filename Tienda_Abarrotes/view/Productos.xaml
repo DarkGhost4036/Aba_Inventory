@@ -69,7 +69,7 @@
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn> 
+                    </DataGridTemplateColumn>
 
                     <!-- Nombre -->
                     <DataGridTextColumn Header="Producto"

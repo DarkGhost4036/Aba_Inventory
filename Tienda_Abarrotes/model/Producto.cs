@@ -7,7 +7,7 @@ namespace AbaInventory.Models
         public int Stock { get; set; }
         public string Categoria { get; set; }
         public int Tiendas { get; set; }
-        public string Imagen { get; set; }   
+        public string Imagen { get; set; }
         public string TiendasTexto => Tiendas == 1 ? "1 store" : $"{Tiendas} stores";
         public Producto()
         {
