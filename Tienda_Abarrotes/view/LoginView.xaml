@@ -9,37 +9,19 @@
         Title="Inicio de Sesion" Height="550" Width="800"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Background="Transparent"
+        Background="Black"
         AllowsTransparency="True">
+
     <Border CornerRadius="12">
-        <Border.Background>
-            <ImageBrush ImageSource="/Images/imagen.png"
-                        Stretch="None"/>
-        </Border.Background>
-        <Border CornerRadius="10" BorderThickness="2"
-                Opacity="0.95" Margin="0 0 0 -44">
-            <Border.BorderBrush>
-                <LinearGradientBrush StartPoint="0,0"
-                                     EndPoint="1,1">
-                    <GradientStop Color="#462ad8" Offset="0"/>
-                    <GradientStop Color="#da34ae" Offset="0.75"/>
-                    <GradientStop Color="#8a16c1" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0"
-                                     EndPoint="1,1">
-                    <GradientStop Color="#65148C" Offset="0"/>
-                    <GradientStop Color="#C470EB" Offset="0.55"/>
-                    <GradientStop Color="#F6E9FC" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
+        <Border CornerRadius="5" BorderThickness="2"
+                Opacity="1" Margin="0 0 0 -44" Background="AliceBlue">
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
+                <Grid Grid.Row="0" Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="25"/>
@@ -47,14 +29,14 @@
                         <ColumnDefinition Width="5"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Login"
-                               Foreground="AntiqueWhite"
+                               Foreground="Black"
                                FontSize="15"
                                Grid.Column="0"
                                VerticalAlignment="Center"
                                Margin="10,0,0,0"/>
                     <Button x:Name="btnMinimizar"
                             BorderThickness="0"
-                            Content="-"
+                            Content="-"                         
                             Foreground="White"
                             FontSize="16"
                             Cursor="Hand"
@@ -63,12 +45,12 @@
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background"
-                                        Value="#8509C8"/>
+                                        Value="Gray"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver"
                                              Value="True">
                                         <Setter Property="Background"
-                                                Value="#68079C"/>
+                                                Value="LightGray"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -101,7 +83,7 @@
                                     <Trigger Property="IsMouseOver"
                                             Value="True">
                                         <Setter Property="Background"
-                                                Value="DeepPink"/>
+                                                Value="Red"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -118,33 +100,31 @@
                         </Button.Template>
                     </Button>
                 </Grid>
-                <StackPanel Width="220"
+                <StackPanel Width="300"
                             Grid.Row="1"
                             Orientation="Vertical"
-                            Margin="0,50,500,0">
-                    <Image Source="/Images/icon.png"
-                           Width="100"
-                           Height="100"/>
-                    <TextBlock Text="Ingenieria de Software"
-                               Foreground="White"
-                               FontSize="20"
-                               FontWeight="Medium"
-                               HorizontalAlignment="Center"/>
+                            Margin="0,40,410,0">
+
                     <TextBlock Text="Aba-Inventory"
-                               Foreground="LightCyan"
+                               Foreground="#0F7A2F"
+                               FontSize="30"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Left"/>
+                    <TextBlock Text="User Name"
+                               Foreground="Black"
                                FontSize="12"
                                FontWeight="Medium"
                                TextWrapping="Wrap"
-                               TextAlignment="Center"
-                               Margin="0,5,0,0"/>
+                               TextAlignment="Left"
+                               Margin="0,20,0,0"/>
                     <TextBox x:Name="txtUser"
                              FontSize="13"
                              FontWeight="Medium"
-                             Foreground="White"
+                             Foreground="Black"
                              CaretBrush="LightGray"
                              BorderBrush="DarkGray"
                              BorderThickness="0,0,0,2"
-                             Height="28"
+                             Height="40"
                              VerticalContentAlignment="Center"
                              Margin="0,5,0,0"
                              Padding="20,0,0,0">
@@ -155,14 +135,14 @@
                         </TextBox.Background>
                     </TextBox>
                     <TextBlock Text="Password"
-                               Foreground="LightGray"
-                               FontSize="15"
+                               Foreground="Black"
+                               FontSize="12"
                                FontWeight="Medium"
                                Margin="0,15,0,0"/>
                     <customcontrol:BindablePasswordBox
-                        Height="28"
+                        Height="40"
                         Margin="0,5,0,0">
-                        
+
                     </customcontrol:BindablePasswordBox>
                     <Button x:Name="btnLogin"
                             BorderThickness="0"
@@ -175,74 +155,58 @@
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background"
-                                        Value="Purple"/>
+                                        Value="#0F7A2F"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver"
                                             Value="True">
                                         <Setter Property="Background"
-                                                Value="MediumPurple"/>
+                                                Value="#1BBF4C"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Width="100" Height="25"
-                                        CornerRadius="9"
+                                <Border Width="300" Height="40"
+                                        CornerRadius="6" Margin="0 30 0 0"
                                         Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Top"
+                                    <ContentPresenter VerticalAlignment="Center"
                                                     HorizontalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
+                    <Image Source="/Images/image_logins.png"
+                            Width="250"
+                            Height="150"
+                            HorizontalAlignment="Center"
+                           Margin="0 20 0 0"
+                            />
                 </StackPanel>
-                <StackPanel Width="220"
+                <StackPanel Width="320"
                             Grid.Row="1"
                             Orientation="Vertical"
-                            Margin="500,50,0,0">
-                    <Image Source="/Images/icon.png"
-                           Width="100"
-                           Height="100"/>
-                    <TextBlock Text="Ingenieria de Software"
-                               Foreground="White"
-                               FontSize="20"
-                               FontWeight="Medium"
-                               HorizontalAlignment="Center"/>
-                    <TextBlock Text="Aba-Inventory"
-                               Foreground="LightCyan"
-                               FontSize="12"
-                               FontWeight="Medium"
-                               TextWrapping="Wrap"
-                               TextAlignment="Center"
-                               Margin="0,5,0,0"/>
-                    <TextBox x:Name="txtPanel"
-                             FontSize="13"
-                             FontWeight="Medium"
-                             Foreground="White"
-                             CaretBrush="LightGray"
-                             BorderBrush="DarkGray"
-                             BorderThickness="0,0,0,2"
-                             Height="28"
-                             VerticalContentAlignment="Center"
-                             Margin="0,5,0,0"
-                             Padding="20,0,0,0">    
-                        <TextBox.Background>
-                            <ImageBrush ImageSource="/Images/user-icon.png"
-                                        Stretch="None"
-                                        AlignmentX="Left"/>
-                        </TextBox.Background>
-                    </TextBox>
-                    <TextBlock Text="Password"
-                               Foreground="LightGray"
+                            Margin="475,0,0,0"
+                    Background="#0F7A2F">
+
+                    <TextBlock Foreground="White"
                                FontSize="15"
+                               FontStyle="Italic"
                                FontWeight="Medium"
-                               Margin="0,15,0,0"/>  
-                    
+                               HorizontalAlignment="Center"
+                               Padding="10"
+                               Margin="0 130 0 0"
+                               TextWrapping="Wrap">
+                        "Aba-Inventory, es ideal para la rapidez y gestión
+                        de tus tiendas en solo unos minutos, no ocupas complicarte
+                        la vida para poder gestionar tus tiendas."
+                    </TextBlock>
+                    <Image Source="/Images/Aba_Inventory_icon.png"
+                            Width="150"
+                            Height="150"/>
+
                 </StackPanel>
             </Grid>
         </Border>
     </Border>
 </Window>
-
-    

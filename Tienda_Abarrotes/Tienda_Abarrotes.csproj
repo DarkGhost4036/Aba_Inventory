@@ -128,8 +128,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\imagen.png" />
-    <Resource Include="Images\key-icon.png" />
     <Resource Include="Images\user-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Aba_Inventory_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\image_logins.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\key-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
