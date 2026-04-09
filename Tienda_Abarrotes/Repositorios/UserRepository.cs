@@ -130,5 +130,30 @@ namespace Tienda_Abarrotes.Repositorios
                 return false;
             }
         }
+        public IEnumerable<UserModel> GetAllUsers()
+        {
+            List<UserModel> users = new List<UserModel>();
+            using (var connection = GetConnection())
+            using(var command = new SqlCommand("SELECT * FROM Usuario", connection))
+            {
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        users.Add(new UserModel
+                        {
+                            Id = reader[0].ToString(),
+                            UserName = reader[1].ToString(),
+                            Password = reader[2].ToString(),
+                            Name = reader[3].ToString(),
+                            LastName = reader[4].ToString(),
+                            Email = reader[5].ToString(),
+                        });
+                    }
+                }
+            }
+            return users;
+        }
     }
 }
