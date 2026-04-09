@@ -24,5 +24,13 @@ namespace Tienda_Abarrotes.View
             InitializeComponent();
 
         }
+
+        private void btnProductos_Click(object sender, RoutedEventArgs e)
+        {
+            Productos ventana = new Productos();
+            ventana.Show();
+            this.Close();
+        }
+    
     }
 }

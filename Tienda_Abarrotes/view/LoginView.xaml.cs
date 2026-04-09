@@ -31,7 +31,10 @@ namespace Tienda_Abarrotes.View
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {
+            Productos ventana = new Productos();
+            ventana.Show();
 
+            this.Close(); // cierra Login
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -40,3 +43,4 @@ namespace Tienda_Abarrotes.View
         }
     }
 }
+
