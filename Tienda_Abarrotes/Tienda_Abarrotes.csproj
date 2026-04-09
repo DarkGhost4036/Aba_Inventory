@@ -59,10 +59,24 @@
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Producto.cs" />
-    <Compile Include="Viewmodel\ProductoViewModel.cs" />
+    <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Model\IUserRepository.cs" />
+    <Compile Include="Repositorios\DatabaseConnectionTester.cs" />
+    <Compile Include="Repositorios\RepositoryBase.cs" />
+    <Compile Include="Repositorios\UserRepository.cs" />
+    <Compile Include="ViewModel\ProductoViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\ViewModelCommand.cs" />
+    <Compile Include="View\AgregarProductos.xaml.cs">
+      <DependentUpon>AgregarProductos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BorrarProducto.xaml.cs">
+      <DependentUpon>BorrarProducto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="View\Productos.xaml.cs">
       <DependentUpon>Productos.xaml</DependentUpon>
     </Compile>
@@ -74,7 +88,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Viewmodel\Productos.xaml">
+    <Page Include="View\AgregarProductos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\BorrarProducto.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

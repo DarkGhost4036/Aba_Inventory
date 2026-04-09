@@ -1,0 +1,108 @@
+﻿<Window x:Class="Tienda_Abarrotes.View.BorrarProducto"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Aba-Inventory" Height="650" Width="1000" Background="#F5F6F8">
+    <Window.Resources>
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="20,0,0,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Background="#1A8344">
+            <StackPanel Margin="10,20,10,10">
+                <TextBlock Text="Aba-Inventory" Foreground="White" FontSize="22" FontWeight="Bold" Margin="10,0,0,30"/>
+
+                <Button Content="Home" Style="{StaticResource MenuButtonStyle}"/>
+                <Button Content="Products" Background="#34A853" Style="{StaticResource MenuButtonStyle}"/>
+                <Button Content="Categories" Style="{StaticResource MenuButtonStyle}"/>
+                <Button Content="Finances" Style="{StaticResource MenuButtonStyle}"/>
+                <Button Content="Settings" Style="{StaticResource MenuButtonStyle}"/>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Bottom" Margin="10,0,0,0">
+                <Button x:Name="BtnEliminarLateral" Content="- Eliminar producto" Background="#D93025" 
+                        Foreground="White" FontWeight="Bold" Height="40" Margin="0,0,0,10" Click="BtnEliminarLateral_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+              
+                </Button>
+                <Button Content="Log out" Foreground="White" Background="Transparent" BorderThickness="0" Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
+                <TextBlock Text="Products" FontSize="28" FontWeight="Bold" VerticalAlignment="Center"/>
+                <TextBox Width="300" Height="35" Margin="40,0,0,0" VerticalContentAlignment="Center" Padding="10,0" x:Name="SearchBox" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,15">
+                <ComboBox Width="120" Height="35" SelectedIndex="0" Margin="0,0,10,0">
+                    <ComboBoxItem Content="Filter by"/>
+                </ComboBox>
+                <Button x:Name="BtnEliminarTabla" Content="- Eliminar producto" Background="#D93025" Foreground="White" 
+                        Width="150" Height="35" FontWeight="Bold"/>
+            </StackPanel>
+
+            <DataGrid Grid.Row="2" x:Name="ProductsGrid" AutoGenerateColumns="False" 
+                      Background="White" BorderThickness="0" CanUserAddRows="False"
+                      RowHeight="60" GridLinesVisibility="None" IsReadOnly="False">
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Header="Select" Binding="{Binding IsSelected}" Width="60"/>
+
+                    <DataGridTemplateColumn Header="Image" Width="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImageUrl}" Height="45" Margin="5"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Header="Name of product" Binding="{Binding Name}" Width="*" IsReadOnly="True"/>
+
+                    <DataGridTemplateColumn Header="Status" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Background="#E8F0FE" CornerRadius="10" Padding="5,2" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding Status}" Foreground="#1967D2" FontSize="11"/>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Header="Stock info" Binding="{Binding Stock}" Width="120" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="120" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>

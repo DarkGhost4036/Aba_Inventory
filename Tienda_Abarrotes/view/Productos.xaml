@@ -46,6 +46,10 @@
                        FontWeight="Bold"
                        Margin="0,0,0,20"/>
 
+            <Image Source="https://via.placeholder.com/100"
+                           Width="100"
+                           Height="100"/>
+
             <DataGrid Grid.Row="1"
                       ItemsSource="{Binding ListaProductos}"
                       AutoGenerateColumns="False"
@@ -56,40 +60,87 @@
 
                 <DataGrid.Columns>
 
-                    <!-- Imagen -->
-                    <DataGridTemplateColumn Header="Estado" Width="120">
+                    <!-- ✅ Imagen -->
+                    <DataGridTemplateColumn Header="Imagen" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Imagen}"
+                                       Width="50"
+                                       Height="50"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!-- Estado con estilo -->
+                    <DataGridTemplateColumn Header="Estado" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Padding="5"
-                    CornerRadius="10"
-                    HorizontalAlignment="Center">
+                            CornerRadius="10"
+                            HorizontalAlignment="Center"
+                            Background="Green">
                                     <TextBlock Text="{Binding Estado}"
-                           Foreground="White"
-                           HorizontalAlignment="Center"/>
+                                   Foreground="White"
+                                   HorizontalAlignment="Center"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
                     <!-- Nombre -->
-                    <DataGridTextColumn Header="Producto"
-                                        Binding="{Binding Nombre}"
-                                        Width="*"/>
-
-                    <!-- Estado -->
-                    <DataGridTextColumn Header="Estado"
-                                        Binding="{Binding Estado}"
-                                        Width="120"/>
+                    <DataGridTemplateColumn Header="Producto" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Nombre}"
+                       TextWrapping="Wrap"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
                     <!-- Stock -->
                     <DataGridTextColumn Header="Stock"
-                                        Binding="{Binding Stock}"
-                                        Width="100"/>
+                            Binding="{Binding Stock}"
+                            Width="50"/>
 
                     <!-- Categoria -->
                     <DataGridTextColumn Header="Categoría"
-                                        Binding="{Binding Categoria}"
-                                        Width="150"/>
+                            Binding="{Binding Categoria}"
+                            Width="80"/>
+
+                    <DataGridTemplateColumn Header="Cantidad" Width="180">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                                    <!-- Botón - -->
+                                    <Button Content="-" Width="30"
+                        Command="{Binding DecrementarCommand}"/>
+
+                                    <!-- Caja de texto -->
+                                    <TextBox Text="{Binding Cantidad, UpdateSourceTrigger=PropertyChanged}"
+                         Width="50"
+                         HorizontalContentAlignment="Center"
+                         Margin="5,0"/>
+
+                                    <!-- Botón + -->
+                                    <Button Content="+" Width="30"
+                        Command="{Binding IncrementarCommand}"/>
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!-- carrito  -->
+                    <DataGridTemplateColumn Header="Acción" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="🛒 Agregar"
+                                        Background="#1BBF4C"
+                                        Foreground="White"
+                                        Command="{Binding AgregarCarritoCommand}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
                 </DataGrid.Columns>
 

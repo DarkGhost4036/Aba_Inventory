@@ -1,5 +1,6 @@
-﻿using System.Windows;
-using AbaInventory.ViewModels;
+﻿using AbaInventory.ViewModel;
+using System.Windows;
+using Tienda_Abarrotes.ViewModel;
 
 namespace Tienda_Abarrotes.View
 {
@@ -9,11 +10,6 @@ namespace Tienda_Abarrotes.View
         {
             InitializeComponent();
             DataContext = new ProductoViewModel();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
