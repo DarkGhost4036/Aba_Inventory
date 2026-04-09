@@ -65,6 +65,7 @@
     <Compile Include="Repositorios\RepositoryBase.cs" />
     <Compile Include="Repositorios\UserRepository.cs" />
     <Compile Include="ViewModel\ProductoViewModel.cs" />
+    <Compile Include="ViewModel\RegistroViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelCommand.cs" />
     <Compile Include="View\AgregarProductos.xaml.cs">
@@ -79,6 +80,9 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="View\Productos.xaml.cs">
       <DependentUpon>Productos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RegistroViewModel.xaml.cs">
+      <DependentUpon>RegistroViewModel.xaml</DependentUpon>
     </Compile>
     <Page Include="customcontrols\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
@@ -103,6 +107,10 @@
     <Page Include="View\Productos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RegistroViewModel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

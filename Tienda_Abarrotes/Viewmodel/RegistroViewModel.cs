@@ -1,5 +1,5 @@
 ﻿using Tienda_Abarrotes.Model;
-using Tienda_Abarrotes.Repositories;
+using Tienda_Abarrotes.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -63,7 +63,7 @@ namespace Tienda_Abarrotes.ViewModel
         private void AddExecute(object user)
         {
             // Validar campos vacíos
-            if (string.IsNullOrWhiteSpace(User.Username) || string.IsNullOrWhiteSpace(User?.Username) ||
+            if (string.IsNullOrWhiteSpace(User.UserName) || string.IsNullOrWhiteSpace(User?.UserName) ||
                 string.IsNullOrWhiteSpace(User.Name) || string.IsNullOrWhiteSpace(User?.LastName) ||
                 string.IsNullOrWhiteSpace(User.Email))
             {
@@ -81,7 +81,7 @@ namespace Tienda_Abarrotes.ViewModel
             }
 
             // Validar si el username ya existe usando GetByUsername()
-            var existingUser = userRepository.GetByUsername(User.Username);
+            var existingUser = userRepository.GetByUserName(User.UserName);
             if (existingUser != null)
             {
                 MessageBox.Show("El nombre de usuario ya existe. Por favor, elige otro.", "Usuario duplicado",
@@ -99,7 +99,7 @@ namespace Tienda_Abarrotes.ViewModel
         private bool AddCanExecute(object user)
         {
             // Deshabilita el botón si los campos están vacíos
-            return !string.IsNullOrWhiteSpace(User?.Username) && !string.IsNullOrWhiteSpace(User?.Password) &&
+            return !string.IsNullOrWhiteSpace(User?.UserName) && !string.IsNullOrWhiteSpace(User?.Password) &&
                    !string.IsNullOrWhiteSpace(User?.Name) && !string.IsNullOrWhiteSpace(User?.LastName) &&
                    !string.IsNullOrWhiteSpace(User?.Email);
         }

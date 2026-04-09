@@ -91,115 +91,115 @@
 			
 			<!-- CUERPO -->
 
-			<StackPanel Width="280" Grid.Row="1" Orientation="Vertical"
+            <StackPanel Width="280" Grid.Row="1" Orientation="Vertical"
 						Margin="0,35,0,0" HorizontalAlignement="Center">
-				<Image Source="/Images/Aba_Inventory_icon.png" Width="100" Height="100"/>
-				<TextBlock Text="Crear cuenta nueva" FontSize="20" Foreground="Black" Margin="0,8,0,12" HorizontalAlignment="Center"/>
+            <Image Source="/Images/Aba_Inventory_icon.png" Width="100" Height="100"/>
+            <TextBlock Text="Crear cuenta nueva" FontSize="20" Foreground="Black" Margin="0,8,0,12" HorizontalAlignment="Center"/>
 
-				<!-- Campos con placeholder -->
+            <!-- Campos con placeholder -->
 
-				<Grid Margin="0,6,0,0">
-					<TextBox x:Name="txtUsuario" Text="{Binding User.Username,
+            <Grid Margin="0,6,0,0">
+                <TextBox x:Name="txtUsuario" Text="{Binding User.Username,
 							   UpdateSourceTrigger=PropertyChanged}"
 							   FontSize="13" FontWeight="Medium" Foreground="Black"
 							   CaretBrush="LightGray"
 							   BorderBrush="DarkGray" BorderThickness="0,0,0,2"
 							   Height="28" VerticalContentAlignment="Center"
-							   Padding="25,0,0,0" Backgorund="Transparent"/>
-					<TextBlock Text="Usuario" Foreground="DarkGray" IsHitTestVisible="False"
+							   Padding="25,0,0,0" Background="Transparent"/>
+                <TextBlock Text="Usuario" Foreground="DarkGray" IsHitTestVisible="False"
 							   Margin="25,0,0,0" VerticalAlignment="Center"
 							   Visibility="{Binding Text, ElementName=txtUsuario, 
 							   Converter={StaticResource StringToVisibilityConverter}}"/>
-				</Grid>
-				<!-- Passwords -->
-				<Grid Margin="0,6,0,0">
-					<PasswordBox x:Name="txtPassword" Text="{Binding User.Password,
+            </Grid>
+            <!-- Passwords -->
+            <Grid Margin="0,6,0,0">
+                <PasswordBox x:Name="txtPassword" Text="{Binding User.Password,
 							   UpdateSourceTrigger=PropertyChanged}"
 							   FontSize="13" FontWeight="Medium" Foreground="Black"
 							   CaretBrush="LightGray"
 							   BorderBrush="DarkGray" BorderThickness="0,0,0,2"
 							   Height="28" VerticalContentAlignment="Center"
 							   Padding="25,0,0,0" Backgorund="Transparent"/>
-					<TextBlock Text="Confirmar contraseña" Foreground="DarkGray" IsHitTestVisible="False"
+                <TextBlock Text="Confirmar contraseña" Foreground="DarkGray" IsHitTestVisible="False"
 							   Margin="25,0,0,0" VerticalAlignment="Center"
 							   Visibility="{Binding Text, ElementName=txtConfirmPass, 
 							   Converter={StaticResource StringToVisibilityConverter}}"/>
-				</Grid>
+            </Grid>
 
-				<Grid Margin="0,6,0,0">
-					<TextBox x:Name="txtNombre" Text="{Binding User.FirstName,
+            <Grid Margin="0,6,0,0">
+                <TextBox x:Name="txtNombre" Text="{Binding User.FirstName,
 							   UpdateSourceTrigger=PropertyChanged}"
 							   FontSize="13" FontWeight="Medium" Foreground="Black"
 							   CaretBrush="LightGray"
 							   BorderBrush="DarkGray" BorderThickness="0,0,0,2"
 							   Height="28" VerticalContentAlignment="Center"
 							   Padding="25,0,0,0" Backgorund="Transparent"/>
-					<TextBlock Text="Nombre" Foreground="DarkGray" IsHitTestVisible="False"
+                <TextBlock Text="Nombre" Foreground="DarkGray" IsHitTestVisible="False"
 							   Margin="25,0,0,0" VerticalAlignment="Center"
 							   Visibility="{Binding Text, ElementName=txtNombre, 
 							   Converter={StaticResource StringToVisibilityConverter}}"/>
-				</Grid>
+            </Grid>
 
-				<Grid Margin="0,6,0,0">
-					<TextBox x:Name="txtApellido" Text="{Binding User.LastName,
+            <Grid Margin="0,6,0,0">
+                <TextBox x:Name="txtApellido" Text="{Binding User.LastName,
 							   UpdateSourceTrigger=PropertyChanged}"
 							   FontSize="13" FontWeight="Medium" Foreground="Black"
 							   CaretBrush="LightGray"
 							   BorderBrush="DarkGray" BorderThickness="0,0,0,2"
 							   Height="28" VerticalContentAlignment="Center"
 							   Padding="25,0,0,0" Backgorund="Transparent"/>
-					<TextBlock Text="Apellido" Foreground="DarkGray" IsHitTestVisible="False"
+                <TextBlock Text="Apellido" Foreground="DarkGray" IsHitTestVisible="False"
 							   Margin="25,0,0,0" VerticalAlignment="Center"
 							   Visibility="{Binding Text, ElementName=txtApellido, 
 							   Converter={StaticResource StringToVisibilityConverter}}"/>
-				</Grid>
+            </Grid>
 
-				<Grid Margin="0,6,0,0">
-					<TextBox x:Name="txtCorreo" Text="{Binding User.Email,
+            <Grid Margin="0,6,0,0">
+                <TextBox x:Name="txtCorreo" Text="{Binding User.Email,
 							   UpdateSourceTrigger=PropertyChanged}"
 							   FontSize="13" FontWeight="Medium" Foreground="Black"
 							   CaretBrush="LightGray"
 							   BorderBrush="DarkGray" BorderThickness="0,0,0,2"
 							   Height="28" VerticalContentAlignment="Center"
 							   Padding="25,0,0,0" Backgorund="Transparent"/>
-					<TextBlock Text="Correo" Foreground="DarkGray" IsHitTestVisible="False"
+                <TextBlock Text="Correo" Foreground="DarkGray" IsHitTestVisible="False"
 							   Margin="25,0,0,0" VerticalAlignment="Center"
 							   Visibility="{Binding Text, ElementName=txtCorreo, 
 							   Converter={StaticResource StringToVisibilityConverter}}"/>
-				</Grid>
+            </Grid>
 
-				<!-- Mensaje de error -->
-				<TextBlock Text="{Binding ErrorMessage}" Foreground="Red" FontSize="12"
+            <!-- Mensaje de error -->
+            <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" FontSize="12"
 						   FontWeight="Medium" Margin="0,10,0,0" TextWrapping="Wrap"/>
 
-				<!-- Botón registrar -->
-				<Button x:Name="btnRegistrar" Content="REGISTRAR" Command="{Binding AddCommand}"
+            <!-- Botón registrar -->
+            <Button x:Name="btnRegistrar" Content="REGISTRAR" Command="{Binding AddCommand}"
 						BorderThickness="0" Background="#0F7A2F" Foreground="White" FontSize="14"
 						Margin="0,12,0,0" Cursor="Hand">
-					<Button.Style>
-						<Style TargetType="Button">
-							<Setter Property="Background" Value="#0F7A2F"/>
-							<Style.Triggers>
-								<Trigger Property="IsMouseOver" Value="True">
-									<Setter Property="Background" Value="#1BBF4C"/>
-								</Trigger>
-							</Style.Triggers>
-						</Style>
-					</Button.Style>
-					<Button.Template>
-						<ControlTemplate TargetType="{x:Type Button}">
-							<Border Width="150" Height="40" CornerRadius="20" Background="{TemplateBinding Background}">
-								<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-							</Border>
-						</ControlTemplate>
-					</Button.Template>
-				</Button>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#0F7A2F"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#1BBF4C"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Width="150" Height="40" CornerRadius="20" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
-				<!-- Cancelar -->
-				<Button x:Name="btnCancelar" Content="CANCELAR" Click="btnCancelar_Click"
+            <!-- Cancelar -->
+            <Button x:Name="btnCancelar" Content="CANCELAR" Click="btnCancelar_Click"
 						BorderThickness="0" Background="Transparent" Foreground="Black" FontSize="12"
 						Margin="0,8,0,0" Cursor="Hand"/>
-			</StackPanel>
-		</Grid>
+
+        </Grid>
 	</Border>
 </Window>
