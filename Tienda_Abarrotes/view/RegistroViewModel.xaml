@@ -1,0 +1,205 @@
+﻿<Window x:Class="Tienda_Abarrotes.View.RegistroViewModel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:Tienda_Abarrotes.ViewModel"
+		xmlns:customcontrols="clr-namespace:Tienda_Abarrotes.CustomControls"
+        mc:Ignorable="d"
+        Title="RegistroViewModel" Height="450" Width="800"
+	    WindowStyle="None"
+	    WindowStartupLocation="CenterScreen">
+	
+	<Window.DataContext>
+		<viewModel:RegistroViewModel/>
+	</Window.DataContext>
+	
+	<Border ConerRadius="12">
+		<Border.Background>
+			<ImageBrush ImageSource="/Images/Aba_Inventory_icon.png"
+						Stretch="None"/>
+		</Border.Background>
+
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="30"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			
+			<!-- Encabezado -->
+			<Grid Grid.Row="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefintion/>
+					<ColumnDefintion Width="25"/>
+					<ColumnDefintion Width="25"/>
+					<ColumnDefintion Width="5"/>
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Text="REGISTRO"
+						   Foreground="Black"
+						   FontSize="15"
+						   FontFamily="Montserrat"
+						   Grid.Column="0"
+						   VerticalAlignment="Center"
+						   Margin="10,0,0,0"/>
+				
+				<Button x:Name="btnMinimizar" BorderThickness="0" Content="-"
+						Foreground="Black" FontSize="16"
+						Cursor="Hand" Grid.Column="1" Click="btnMinimizar_Click">
+					<Button.Style>
+						<Style TargetType="Button">
+							<Setter Property="Background" Value="#0F7A2F"/>
+							<Style.Triggers>
+								<Trigger Property="IsMouseOver" Value="True">
+									<Setter Property="Background" Value="#1BBF4C"/>
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+					<Button.Template>
+						<ControlTemplate TargetType="Button">
+							<Border Width="18" Height="18" CornerRadius="9"
+									Background="{TemplateBinding Background}">
+								<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							</Border>
+						</ControlTemplate>
+					</Button.Template>
+				</Button>
+				
+				<Button x:Name="btnCerrar" BorderThickness="0" Content="X"
+						Foreground="Black" Cursor="Hand" Grid.Column="2" Click="btnCerrar_Click">
+					<Button.Style>
+						<Style TargetType="Button">
+							<Setter Property="Background" Value="#0F7A2F"/>
+							<Style.Triggers>
+								<Trigger Property="IsMouseOver" Value="True">
+									<Setter Property="Background" Value="#1BBF4C"/>
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+					<Button.Template>
+						<ControlTemplate TargetType="Button">
+							<Border Width="18" Height="18" CornerRadius="9"
+									Background="{TemplateBinding Background}">
+								<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							</Border>
+						</ControlTemplate>
+					</Button.Template>
+				</Button>
+			</Grid>
+			
+			<!-- CUERPO -->
+
+			<StackPanel Width="280" Grid.Row="1" Orientation="Vertical"
+						Margin="0,35,0,0" HorizontalAlignement="Center">
+				<Image Source="/Images/Aba_Inventory_icon.png" Width="100" Height="100"/>
+				<TextBlock Text="Crear cuenta nueva" FontSize="20" Foreground="Black" Margin="0,8,0,12" HorizontalAlignment="Center"/>
+
+				<!-- Campos con placeholder -->
+
+				<Grid Margin="0,6,0,0">
+					<TextBox x:Name="txtUsuario" Text="{Binding User.Username,
+							   UpdateSourceTrigger=PropertyChanged}"
+							   FontSize="13" FontWeight="Medium" Foreground="Black"
+							   CaretBrush="LightGray"
+							   BorderBrush="DarkGray" BorderThickness="0,0,0,2"
+							   Height="28" VerticalContentAlignment="Center"
+							   Padding="25,0,0,0" Backgorund="Transparent"/>
+					<TextBlock Text="Usuario" Foreground="DarkGray" IsHitTestVisible="False"
+							   Margin="25,0,0,0" VerticalAlignment="Center"
+							   Visibility="{Binding Text, ElementName=txtUsuario, 
+							   Converter={StaticResource StringToVisibilityConverter}}"/>
+				</Grid>
+				<!-- Passwords -->
+				<Grid Margin="0,6,0,0">
+					<PasswordBox x:Name="txtPassword" Text="{Binding User.Password,
+							   UpdateSourceTrigger=PropertyChanged}"
+							   FontSize="13" FontWeight="Medium" Foreground="Black"
+							   CaretBrush="LightGray"
+							   BorderBrush="DarkGray" BorderThickness="0,0,0,2"
+							   Height="28" VerticalContentAlignment="Center"
+							   Padding="25,0,0,0" Backgorund="Transparent"/>
+					<TextBlock Text="Confirmar contraseña" Foreground="DarkGray" IsHitTestVisible="False"
+							   Margin="25,0,0,0" VerticalAlignment="Center"
+							   Visibility="{Binding Text, ElementName=txtConfirmPass, 
+							   Converter={StaticResource StringToVisibilityConverter}}"/>
+				</Grid>
+
+				<Grid Margin="0,6,0,0">
+					<TextBox x:Name="txtNombre" Text="{Binding User.FirstName,
+							   UpdateSourceTrigger=PropertyChanged}"
+							   FontSize="13" FontWeight="Medium" Foreground="Black"
+							   CaretBrush="LightGray"
+							   BorderBrush="DarkGray" BorderThickness="0,0,0,2"
+							   Height="28" VerticalContentAlignment="Center"
+							   Padding="25,0,0,0" Backgorund="Transparent"/>
+					<TextBlock Text="Nombre" Foreground="DarkGray" IsHitTestVisible="False"
+							   Margin="25,0,0,0" VerticalAlignment="Center"
+							   Visibility="{Binding Text, ElementName=txtNombre, 
+							   Converter={StaticResource StringToVisibilityConverter}}"/>
+				</Grid>
+
+				<Grid Margin="0,6,0,0">
+					<TextBox x:Name="txtApellido" Text="{Binding User.LastName,
+							   UpdateSourceTrigger=PropertyChanged}"
+							   FontSize="13" FontWeight="Medium" Foreground="Black"
+							   CaretBrush="LightGray"
+							   BorderBrush="DarkGray" BorderThickness="0,0,0,2"
+							   Height="28" VerticalContentAlignment="Center"
+							   Padding="25,0,0,0" Backgorund="Transparent"/>
+					<TextBlock Text="Apellido" Foreground="DarkGray" IsHitTestVisible="False"
+							   Margin="25,0,0,0" VerticalAlignment="Center"
+							   Visibility="{Binding Text, ElementName=txtApellido, 
+							   Converter={StaticResource StringToVisibilityConverter}}"/>
+				</Grid>
+
+				<Grid Margin="0,6,0,0">
+					<TextBox x:Name="txtCorreo" Text="{Binding User.Email,
+							   UpdateSourceTrigger=PropertyChanged}"
+							   FontSize="13" FontWeight="Medium" Foreground="Black"
+							   CaretBrush="LightGray"
+							   BorderBrush="DarkGray" BorderThickness="0,0,0,2"
+							   Height="28" VerticalContentAlignment="Center"
+							   Padding="25,0,0,0" Backgorund="Transparent"/>
+					<TextBlock Text="Correo" Foreground="DarkGray" IsHitTestVisible="False"
+							   Margin="25,0,0,0" VerticalAlignment="Center"
+							   Visibility="{Binding Text, ElementName=txtCorreo, 
+							   Converter={StaticResource StringToVisibilityConverter}}"/>
+				</Grid>
+
+				<!-- Mensaje de error -->
+				<TextBlock Text="{Binding ErrorMessage}" Foreground="Red" FontSize="12"
+						   FontWeight="Medium" Margin="0,10,0,0" TextWrapping="Wrap"/>
+
+				<!-- Botón registrar -->
+				<Button x:Name="btnRegistrar" Content="REGISTRAR" Command="{Binding AddCommand}"
+						BorderThickness="0" Background="#0F7A2F" Foreground="White" FontSize="14"
+						Margin="0,12,0,0" Cursor="Hand">
+					<Button.Style>
+						<Style TargetType="Button">
+							<Setter Property="Background" Value="#0F7A2F"/>
+							<Style.Triggers>
+								<Trigger Property="IsMouseOver" Value="True">
+									<Setter Property="Background" Value="#1BBF4C"/>
+								</Trigger>
+							</Style.Triggers>
+						</Style>
+					</Button.Style>
+					<Button.Template>
+						<ControlTemplate TargetType="{x:Type Button}">
+							<Border Width="150" Height="40" CornerRadius="20" Background="{TemplateBinding Background}">
+								<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							</Border>
+						</ControlTemplate>
+					</Button.Template>
+				</Button>
+
+				<!-- Cancelar -->
+				<Button x:Name="btnCancelar" Content="CANCELAR" Click="btnCancelar_Click"
+						BorderThickness="0" Background="Transparent" Foreground="Black" FontSize="12"
+						Margin="0,8,0,0" Cursor="Hand"/>
+			</StackPanel>
+		</Grid>
+	</Border>
+</Window>
