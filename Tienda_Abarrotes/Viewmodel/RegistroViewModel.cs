@@ -1,5 +1,5 @@
 ﻿using Tienda_Abarrotes.Model;
-using Tienda_Abarrotes.Repositories;
+using Tienda_Abarrotes.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
