@@ -54,7 +54,7 @@
                             FontSize="16"
                             Cursor="Hand"
                             Grid.Column="1"
-                            Click="btnMinimizar_Click">
+                            Click="BtnMinimizar_Click">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background"

@@ -89,8 +89,10 @@ namespace Tienda_Abarrotes.ViewModel
                 return;
             }
 
-            // Si pasa las validaciones, se añade el usuario
-            User.Id = Guid.NewGuid().ToString();
+            // Si pasa las validaciones, se añade el usuario ( el id es un numero basado en el conteo actual) se actualiza automaticamente
+            var nuevoUsuario = new UserModel();
+            nuevoUsuario.Id = Users.Count + 1;
+            nuevoUsuario.UserName = "nuevo_user";
             userRepository.Add(User);
             MessageBox.Show("Usuario añadido correctamente.", "Éxito", MessageBoxButton.OK,
                 MessageBoxImage.Information);

@@ -24,7 +24,7 @@ namespace Tienda_Abarrotes.View
             InitializeComponent();
         }
 
-        private void btnMinimizar_Click(object sender, RoutedEventArgs e)
+        private void BtnMinimizar_Click(object sender, RoutedEventArgs e)
         {
             RegistroView ventana = new RegistroView();
             ventana.Show();
