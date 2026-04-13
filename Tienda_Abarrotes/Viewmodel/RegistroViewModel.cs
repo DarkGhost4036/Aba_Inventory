@@ -15,7 +15,7 @@ namespace Tienda_Abarrotes.ViewModel
 {
     public class RegistroViewModel : ViewModelBase
     {
-        private readonly RepositoryBase repositoryBase;
+        //private readonly RepositoryBase repositoryBase;
 
         private ObservableCollection<UserModel> _users;
         private UserModel _user;
