@@ -55,8 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converter\StringToVisibilityConverter.cs" />
-    <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
+    <Compile Include="Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="customcontrols\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Producto.cs" />
@@ -81,10 +81,10 @@
     <Compile Include="View\Productos.xaml.cs">
       <DependentUpon>Productos.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RegistroViewModel.xaml.cs">
-      <DependentUpon>RegistroViewModel.xaml</DependentUpon>
+    <Compile Include="View\RegistroView.xaml.cs">
+      <DependentUpon>RegistroView.xaml</DependentUpon>
     </Compile>
-    <Page Include="CustomControls\BindablePasswordBox.xaml">
+    <Page Include="customcontrols\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -108,7 +108,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RegistroViewModel.xaml">
+    <Page Include="View\RegistroView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
