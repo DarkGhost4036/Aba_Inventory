@@ -13,7 +13,7 @@
 
     <!-- Recursos -->
     <Window.Resources>
-        <local:StringToVisibilityConverter x:Key="StringToVisibilityConverters"/>
+        <local:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
     </Window.Resources>
 
     <!-- ViewModel -->

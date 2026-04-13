@@ -26,7 +26,11 @@ namespace Tienda_Abarrotes.View
 
         private void btnMinimizar_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            RegistroView ventana = new RegistroView();
+            ventana.Show();
+
+            this.Close(); // cierra Login
+
         }
 
         private void btnCerrar_Click(object sender, RoutedEventArgs e)

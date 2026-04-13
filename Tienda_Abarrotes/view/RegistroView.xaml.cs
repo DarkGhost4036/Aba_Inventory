@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using AbaInventory.ViewModel;
+using System.Windows;
 
 namespace Tienda_Abarrotes.View
 {
