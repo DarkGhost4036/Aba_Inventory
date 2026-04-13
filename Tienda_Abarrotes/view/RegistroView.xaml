@@ -22,11 +22,8 @@
     </Window.DataContext>
 
     <!-- Contenedor principal -->
-    <Border CornerRadius="12">
-        <Border.Background>
-            <ImageBrush ImageSource="/Images/Aba_Inventory_icon.png"
-                        Stretch="None"/>
-        </Border.Background>
+    <Border CornerRadius="12" Background="Green">
+   
 
         <Grid>
             <Grid.RowDefinitions>
@@ -44,7 +41,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="REGISTRO"
-                           Foreground="Black"
+                           Foreground="White"
                            FontSize="15"
                            FontFamily="Montserrat"
                            Grid.Column="0"
@@ -128,7 +125,7 @@
 
                 <TextBlock Text="Crear cuenta nueva"
                            FontSize="20"
-                           Foreground="Black"
+                           Foreground="White"
                            Margin="0,8,0,12"
                            HorizontalAlignment="Center"/>
 
