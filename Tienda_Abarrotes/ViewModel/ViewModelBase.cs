@@ -18,7 +18,7 @@ namespace Tienda_Abarrotes.ViewModel
         }
       
     }
-    public class LoginViewModel()
+    public class LoginViewModel
     {
         
     }

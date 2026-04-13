@@ -12,9 +12,11 @@
         WindowStartupLocation="CenterScreen"
         Background="Black"
         AllowsTransparency="True">
+	
     <Window.DataContext>
         <viewModel:LoginViewModel/>
     </Window.DataContext>
+	
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
     </Window.Resources>
