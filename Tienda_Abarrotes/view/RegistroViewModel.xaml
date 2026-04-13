@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:Tienda_Abarrotes.ViewModel"
         xmlns:customcontrols="clr-namespace:Tienda_Abarrotes.customcontrols"
-        xmlns:conv="clr-namespace:Tienda_Abarrotes.Converters"
+        xmlns:local="clr-namespace:Tienda_Abarrotes.Converters"
         mc:Ignorable="d"
         Title="Registro" Height="450" Width="800"
         WindowStyle="None"
@@ -13,8 +13,13 @@
 
     <!-- Recursos -->
     <Window.Resources>
-        <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <local:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
     </Window.Resources>
+
+    <!-- ViewModel -->
+    <Window.DataContext>
+        <viewModel:RegistroViewModel/>
+    </Window.DataContext>
 
     <!-- Contenedor principal -->
     <Border CornerRadius="12">

@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -15,36 +19,11 @@ namespace Tienda_Abarrotes.View
     /// </summary>
     public partial class RegistroViewModel : Window
     {
-        public RegistroViewModel()
+        public RegistroViewModel() => InitializeComponent();
+
+        private void InitializeComponent()
         {
-            InitializeComponent();
-
-            this.DataContext = new Tienda_Abarrotes.ViewModel.RegistroViewModel();
-        }
-
-        // Eventos para botones como minimizar, cerrar y cancelar
-
-        private void btnMinimizar_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
-
-        private void btnCerrar_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnCancelar_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (this.DataContext is Tienda_Abarrotes.ViewModel.RegistroViewModel vm)
-            {
-                vm.User.Password = txtPassword.Password;
-            }
+            throw new NotImplementedException();
         }
     }
 }
