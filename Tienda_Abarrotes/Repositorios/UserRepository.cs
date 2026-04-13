@@ -147,8 +147,9 @@ namespace Tienda_Abarrotes.Repositorios
                             UserName = reader[1].ToString(),
                             Password = reader[2].ToString(),
                             Name = reader[3].ToString(),
-                            LastName = reader[4].ToString(),
-                            Email = reader[5].ToString(),
+                            FirstName= reader[4].ToString(),
+                            LastName = reader[5].ToString(),
+                            Email = reader[6].ToString(),
                         });
                     }
                 }

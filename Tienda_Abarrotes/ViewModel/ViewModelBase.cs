@@ -16,5 +16,10 @@ namespace Tienda_Abarrotes.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+      
+    }
+    public class LoginViewModel()
+    {
+        
     }
 }
