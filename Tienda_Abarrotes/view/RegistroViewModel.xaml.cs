@@ -19,9 +19,11 @@ namespace Tienda_Abarrotes.View
     /// </summary>
     public partial class RegistroViewModel : Window
     {
-        public RegistroViewModel()
+        public RegistroViewModel() => InitializeComponent();
+
+        private void InitializeComponent()
         {
-            InitializeComponent();
+            throw new NotImplementedException();
         }
     }
 }

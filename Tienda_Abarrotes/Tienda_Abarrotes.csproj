@@ -55,7 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="customcontrols\BindablePasswordBox.xaml.cs">
+    <Compile Include="Converter\StringToVisibilityConverter.cs" />
+    <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Producto.cs" />
@@ -84,7 +85,7 @@
     <Compile Include="View\RegistroViewModel.xaml.cs">
       <DependentUpon>RegistroViewModel.xaml</DependentUpon>
     </Compile>
-    <Page Include="customcontrols\BindablePasswordBox.xaml">
+    <Page Include="CustomControls\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,5 +166,6 @@
   <ItemGroup>
     <Resource Include="Images\key-icon.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
