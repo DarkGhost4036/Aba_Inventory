@@ -15,7 +15,7 @@ namespace Tienda_Abarrotes.Repositorios
         public RepositoryBase()
         {
             _connectionString =
-                "Server=LENOVO_LOQ\\VSGESTION;"+
+                "Server=YAIR-ESP\\VSGESTION;" +
                 "Database=Tienda_Abarrotes_BD;"+
                 "Integrated Security=true";
         }

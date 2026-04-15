@@ -4,6 +4,7 @@
         Title="Productos"
         Height="600" Width="1000"
         Background="#F4F6F8">
+    
 
     <Grid>
         <Grid.ColumnDefinitions>

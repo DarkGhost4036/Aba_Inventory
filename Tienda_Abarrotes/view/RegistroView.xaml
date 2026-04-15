@@ -176,7 +176,7 @@
                 <!-- Nombre -->
                 <Grid Margin="0,6,0,0">
                     <TextBox x:Name="txtNombre"
-                             Text="{Binding User.FirstName, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding User.Name, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="13"
                              FontWeight="Medium"
                              Foreground="Black"

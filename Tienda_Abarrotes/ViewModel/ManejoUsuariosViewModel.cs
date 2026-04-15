@@ -31,8 +31,8 @@ namespace Tienda_Abarrotes.ViewModel
             // Inicialización de datos
             Users = new ObservableCollection<UserModel>
             {
-                new UserModel { Id=1, UserName="admin", Email="admin@tienda.com", FirstName="Juan", LastName="Pérez" },
-                new UserModel { Id=2, UserName="maria", Email="maria@tienda.com", FirstName="María", LastName="López" }
+                new UserModel { Id=1, UserName="admin", Email="admin@tienda.com", Name="Juan", LastName="Pérez" },
+                new UserModel { Id=2, UserName="maria", Email="maria@tienda.com", Name="María", LastName="López" }
             };
 
             // Implementación de comandos 
