@@ -15,7 +15,8 @@ namespace Tienda_Abarrotes.ViewModel
 {
     public class RegistroViewModel : ViewModelBase
     {
-        private readonly RepositoryBase repositoryBase;
+        // No se necesita, pero se guarda por si se requiere en el futuro para otras operaciones
+        //private readonly RepositoryBase repositoryBase;
 
         private ObservableCollection<UserModel> _users;
         private UserModel _user;
@@ -62,48 +63,41 @@ namespace Tienda_Abarrotes.ViewModel
 
         private void AddExecute(object user)
         {
-            // Validar campos vacíos
-            if (string.IsNullOrWhiteSpace(User.UserName) || string.IsNullOrWhiteSpace(User?.UserName) ||
-                string.IsNullOrWhiteSpace(User.Name) || string.IsNullOrWhiteSpace(User?.LastName) ||
-                string.IsNullOrWhiteSpace(User.Email))
+            MessageBox.Show(
+                $"UserName: {User?.UserName}\n" +
+                $"Password: {User?.Password}\n" +
+                $"Name: {User?.Name}\n" +
+                $"LastName: {User?.LastName}\n" +
+                $"Email: {User?.Email}"
+            );
+
+            if (string.IsNullOrWhiteSpace(User?.UserName) ||
+                string.IsNullOrWhiteSpace(User?.Name) ||
+                string.IsNullOrWhiteSpace(User?.LastName) ||
+                string.IsNullOrWhiteSpace(User?.Email))
             {
-                MessageBox.Show("Por favor, completa todos los campos antes de guardar.",
-                    "Campos incompletos", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Campos incompletos");
                 return;
             }
 
-            // Validar que las contraseñas coincidan
-            if (User.Password != User.ConfirmPassword)
-            {
-                MessageBox.Show("Las contraseñas no coinciden. Por favor, verifica.", "Error de contraseña",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            // Validar si el username ya existe usando GetByUsername()
             var existingUser = userRepository.GetByUserName(User.UserName);
             if (existingUser != null)
             {
-                MessageBox.Show("El nombre de usuario ya existe. Por favor, elige otro.", "Usuario duplicado",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Usuario duplicado");
                 return;
             }
 
-            // Si pasa las validaciones, se añade el usuario ( el id es un numero basado en el conteo actual) se actualiza automaticamente
-            var nuevoUsuario = new UserModel();
-            nuevoUsuario.Id = Users.Count + 1;
-            nuevoUsuario.UserName = "nuevo_user";
             userRepository.Add(User);
-            MessageBox.Show("Usuario añadido correctamente.", "Éxito", MessageBoxButton.OK,
-                MessageBoxImage.Information);
+
+            MessageBox.Show("Usuario añadido correctamente");
+
+            User = new UserModel(); // limpiar formulario
         }
 
         private bool AddCanExecute(object user)
         {
             // Deshabilita el botón si los campos están vacíos
-            return !string.IsNullOrWhiteSpace(User?.UserName) && !string.IsNullOrWhiteSpace(User?.Password) &&
-                   !string.IsNullOrWhiteSpace(User?.Name)  && !string.IsNullOrWhiteSpace(User?.LastName) &&
-                   !string.IsNullOrWhiteSpace(User?.Email);
+            return true;
         }
 
         public ICommand DeleteCommand

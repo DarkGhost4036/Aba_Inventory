@@ -1,5 +1,7 @@
 ﻿using AbaInventory.ViewModel;
 using System.Windows;
+using System.Windows.Controls;
+using Tienda_Abarrotes.ViewModel;
 
 namespace Tienda_Abarrotes.View
 {
@@ -22,12 +24,17 @@ namespace Tienda_Abarrotes.View
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
+            LoginView ventana = new LoginView();
+            ventana.Show();
             this.Close();
         }
 
         private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            // Logica para manejar el cambio de contraseña, si es necesario
+            if (DataContext is RegistroViewModel vm)
+            {
+                vm.User.Password = ((PasswordBox)sender).Password; // 🔥 CORRECTO
+            }
         }
     }
 }
