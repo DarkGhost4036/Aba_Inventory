@@ -31,6 +31,13 @@ namespace Tienda_Abarrotes.View
             ventana.Show();
             this.Close();
         }
-    
+        private void BtnEliminarLateral_Click(object sender, RoutedEventArgs e)
+        {
+            BorrarProducto ventana = new BorrarProducto();
+            ventana.Show();
+            this.Close();
+
+        }
+
     }
 }
