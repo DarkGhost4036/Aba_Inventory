@@ -64,7 +64,7 @@ namespace Tienda_Abarrotes.ViewModel
         {
             // Validar campos vacíos
             if (string.IsNullOrWhiteSpace(User.UserName) || string.IsNullOrWhiteSpace(User?.UserName) ||
-                string.IsNullOrWhiteSpace(User.Name) || string.IsNullOrWhiteSpace(User?.FirstName) || string.IsNullOrWhiteSpace(User?.LastName) ||
+                string.IsNullOrWhiteSpace(User.Name) || string.IsNullOrWhiteSpace(User?.LastName) ||
                 string.IsNullOrWhiteSpace(User.Email))
             {
                 MessageBox.Show("Por favor, completa todos los campos antes de guardar.",
@@ -102,7 +102,7 @@ namespace Tienda_Abarrotes.ViewModel
         {
             // Deshabilita el botón si los campos están vacíos
             return !string.IsNullOrWhiteSpace(User?.UserName) && !string.IsNullOrWhiteSpace(User?.Password) &&
-                   !string.IsNullOrWhiteSpace(User?.Name) && !string.IsNullOrWhiteSpace(User?.FirstName) && !string.IsNullOrWhiteSpace(User?.LastName) &&
+                   !string.IsNullOrWhiteSpace(User?.Name)  && !string.IsNullOrWhiteSpace(User?.LastName) &&
                    !string.IsNullOrWhiteSpace(User?.Email);
         }
 

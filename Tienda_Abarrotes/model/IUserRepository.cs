@@ -15,6 +15,7 @@ namespace Tienda_Abarrotes.Model
         void Delete(UserModel userModel);
         UserModel GetByUserName(string userName);
         bool TestConnection(out string message);
+        IEnumerable<UserModel> GetAllUsers();
 
     }
   

@@ -44,7 +44,7 @@
             </StackPanel>
 
             <StackPanel VerticalAlignment="Bottom" Margin="10,0,0,15">
-                <Button Content="Log out" Foreground="White" Background="Transparent" BorderThickness="0" Cursor="Hand"/>
+                <Button Content="Salida" Foreground="White" Background="Transparent" BorderThickness="0" Cursor="Hand"/>
             </StackPanel>
         </Grid>
 

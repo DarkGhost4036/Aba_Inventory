@@ -1,9 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using Tienda_Abarrotes.Model;
+using Tienda_Abarrotes.Repositorios;
 
 namespace Tienda_Abarrotes.ViewModel
 {
@@ -31,8 +34,8 @@ namespace Tienda_Abarrotes.ViewModel
             // Inicialización de datos
             Users = new ObservableCollection<UserModel>
             {
-                new UserModel { Id=1, UserName="admin", Email="admin@tienda.com", FirstName="Juan", LastName="Pérez" },
-                new UserModel { Id=2, UserName="maria", Email="maria@tienda.com", FirstName="María", LastName="López" }
+                new UserModel { Id=1, UserName="admin", Email="admin@tienda.com", LastName="Pérez" },
+                new UserModel { Id=2, UserName="maria", Email="maria@tienda.com", LastName="López" }
             };
 
             // Implementación de comandos 
@@ -68,5 +71,20 @@ namespace Tienda_Abarrotes.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+        private void CargarUsuariosDesdeBD()
+        {
+
+            Users.Clear(); // Limpiamos la lista 
+            IUserRepository repo = new UserRepository();
+            var UsuariosBD = repo.GetAllUsers();
+            foreach(var user in UsuariosBD)
+            {
+                Users.Add(user);
+            }
+        }
+                                      
+                
+
+        
     }
 }

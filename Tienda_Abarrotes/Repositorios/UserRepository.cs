@@ -59,7 +59,7 @@ namespace Tienda_Abarrotes.Repositorios
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "DELETE FROM[Usuario WHERE Id = @Id";
+                command.CommandText = "DELETE FROM[Usuario] WHERE Id = @Id";
                 command.Parameters.AddWithValue("@Id", userModel.Id);
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -147,9 +147,8 @@ namespace Tienda_Abarrotes.Repositorios
                             UserName = reader[1].ToString(),
                             Password = reader[2].ToString(),
                             Name = reader[3].ToString(),
-                            FirstName= reader[4].ToString(),
-                            LastName = reader[5].ToString(),
-                            Email = reader[6].ToString(),
+                            LastName = reader[4].ToString(),
+                            Email = reader[5].ToString(),
                         });
                     }
                 }
