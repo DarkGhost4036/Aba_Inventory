@@ -22,6 +22,7 @@
             </Setter>
         </Style>
     </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
@@ -29,6 +30,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0" Background="#1A8344">
+
             <StackPanel Margin="10,20,10,10">
                 <TextBlock Text="Aba-Inventory" Foreground="White" FontSize="22" FontWeight="Bold" Margin="10,0,0,30"/>
 
@@ -37,9 +39,16 @@
                 <Button Content="Categories" Style="{StaticResource MenuButtonStyle}"/>
                 <Button Content="Finances" Style="{StaticResource MenuButtonStyle}"/>
                 <Button Content="Settings" Style="{StaticResource MenuButtonStyle}"/>
-            </StackPanel>
 
-            <StackPanel VerticalAlignment="Bottom" Margin="10,0,0,0">
+                <Button x:Name="BtnAgregarLateral" Content="+ Agregar Producto" Background="#2ECC71" 
+                        Foreground="White" FontWeight="Bold" Height="40" Margin="0,30,0,10" Click="btnAgregarProducto_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
                 <Button x:Name="BtnEliminarLateral" Content="- Eliminar producto" Background="#D93025" 
                         Foreground="White" FontWeight="Bold" Height="40" Click="BtnEliminarLateral_Click">
                     <Button.Resources>
@@ -47,8 +56,10 @@
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </Button.Resources>
-
                 </Button>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Bottom" Margin="10,0,0,15">
                 <Button Content="Log out" Foreground="White" Background="Transparent" BorderThickness="0" Cursor="Hand"/>
             </StackPanel>
         </Grid>
