@@ -35,12 +35,15 @@
             <Button Content="Configuración" Margin="10"
                     Click="btnConfiguración_Click"/>
 
+            <Button Content="Gestion de Usuarios" Margin="10"
+                    Click="btnManejadorUsuarios_Click"/>
+
             <Button Content="+ Agregar Producto"
                     Background="#1BBF4C"
                     Foreground="White"
                     Margin="10"
                     Height="40"
-                    Click="btnAgregarProducto_Click"/>  
+                    Click="btnAgregarProducto_Click"/>
         </StackPanel>
 
         <!-- CONTENIDO -->
@@ -131,7 +134,7 @@
                                              Width="50"
                                              HorizontalContentAlignment="Center"
                                              Margin="5,0"
-                                             Text="0"/>         
+                                             Text="0"/>
                                     <!-- Botón + -->
                                     <Button Content="+" Width="30" Click="btn_mas_Click"/>
 
