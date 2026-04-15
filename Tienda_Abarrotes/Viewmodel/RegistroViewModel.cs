@@ -15,7 +15,8 @@ namespace Tienda_Abarrotes.ViewModel
 {
     public class RegistroViewModel : ViewModelBase
     {
-        private readonly RepositoryBase repositoryBase;
+        // No se necesita, pero se guarda por si se requiere en el futuro para otras operaciones
+        //private readonly RepositoryBase repositoryBase;
 
         private ObservableCollection<UserModel> _users;
         private UserModel _user;
