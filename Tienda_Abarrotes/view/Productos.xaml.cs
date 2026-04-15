@@ -43,6 +43,12 @@ namespace Tienda_Abarrotes.View
             ventana.Show();
             this.Close();
         }
+        public void btnManejadorUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            ManejoUsuarioViewModel ventana = new ManejoUsuarioViewModel();
+            ventana.Show();
+            this.Close(); // cierra Login
+        }
 
         private void btn_mas_Click(object sender, RoutedEventArgs e)
         {
@@ -82,7 +88,7 @@ namespace Tienda_Abarrotes.View
             }
         }
 
-        public void btnManejadorUsuarios_Click(object sender, RoutedEventArgs e)
+        public void btnManejadorUsuarios(object sender, RoutedEventArgs e)
         {
             ManejoUsuarioViewModel ventana = new ManejoUsuarioViewModel();
             ventana.Show();

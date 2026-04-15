@@ -34,12 +34,15 @@
             <StackPanel Margin="10,20,10,10">
                 <TextBlock Text="Aba-Inventory" Foreground="White" FontSize="22" FontWeight="Bold" Margin="10,0,0,30"/>
 
-                <Button Content="Inicio" Style="{StaticResource MenuButtonStyle}"/>
-                <Button Content="Productos" Background="#34A853" Style="{StaticResource MenuButtonStyle}"/>
-                <Button Content="Categorias" Style="{StaticResource MenuButtonStyle}"/>
-                <Button Content="Finanzas" Style="{StaticResource MenuButtonStyle}"/>
-                <Button Content="Configuración" Style="{StaticResource MenuButtonStyle}"/>
-
+                <Button Content="Inicio" Margin="10"
+                Click="btnInicio_Click"/>
+                <Button Content="Productos" Margin="10"
+        Click="btnProductos_Click"/>
+                <Button Content="Categorias" Margin="10"/>
+                <Button Content="Finanzas" Margin="10"/>
+                <Button Content="Configuración" Margin="10"/>
+                <Button Content="Gestion de Usuarios" Margin="10"
+        Click="btnManejadorUsuarios_Click"/>
                 <Button x:Name="BtnAgregarLateral" Content="+ Agregar Producto" Background="#2ECC71" 
                         Foreground="White" FontWeight="Bold" Height="40" Margin="0,30,0,10" Click="btnAgregarProducto_Click">
                     <Button.Resources>

@@ -53,6 +53,12 @@ namespace Tienda_Abarrotes.View
                 }
             }
         }
+        private void btnProductos_Click(object sender, RoutedEventArgs e)
+        {
+            Productos ventana = new Productos();
+            ventana.Show();
+            this.Close();
+        }
 
         private void BtnEliminarLateral_Click(object sender, RoutedEventArgs e)
         {
@@ -67,6 +73,23 @@ namespace Tienda_Abarrotes.View
             AgregarProductos ventana = new AgregarProductos();
             ventana.Show();
             this.Close();
+        }
+        private void btnInicio_Click(object sender, RoutedEventArgs e)
+        {
+            LoginView ventana = new LoginView();
+            ventana.Show();
+            this.Close(); // cierra Login
+        }
+        public void btnManejadorUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            ManejoUsuarioViewModel ventana = new ManejoUsuarioViewModel();
+            ventana.Show();
+            this.Close(); // cierra Login
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 
