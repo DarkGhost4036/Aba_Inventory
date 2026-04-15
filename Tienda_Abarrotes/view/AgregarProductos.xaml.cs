@@ -39,5 +39,9 @@ namespace Tienda_Abarrotes.View
 
         }
 
+        private void btnGuardarProducto_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -22,16 +22,6 @@
 
                 <Button Content="+ Agregar Producto" Background="#1BBF4C" Foreground="White" Margin="10,20,10,10" 
                         Height="40" FontSize="15" FontWeight="Bold">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="#0F7A2F"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#1BBF4C"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Height="40" CornerRadius="6" Background="{TemplateBinding Background}">
@@ -67,36 +57,38 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" Margin="0,0,15,0">
-                        <TextBlock Text="Nombre de Producto*" FontWeight="SemiBold" Margin="0,0,0,5"/>
-                        <TextBox Height="35" Margin="0,0,0,20" VerticalContentAlignment="Center" Padding="5,0"/>
+                    <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                        <TextBlock Text="Nombre de Producto*" FontWeight="SemiBold"/>
+                        <TextBox x:Name="txtNombre" Height="35" Margin="0,5,0,15"/>
 
-                        <TextBlock Text="Código de Producto*" FontWeight="SemiBold" Margin="0,0,0,5"/>
-                        <TextBox Height="35" Margin="0,0,0,20" VerticalContentAlignment="Center" Padding="5,0"/>
+                        <TextBlock Text="Código de Producto*" FontWeight="SemiBold"/>
+                        <TextBox x:Name="txtCodigo" Height="35" Margin="0,5,0,15"/>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="1" Margin="15,0,0,0">
-                        <TextBlock Text="Tamaño de existencias*" FontWeight="SemiBold" Margin="0,0,0,5"/>
-                        <TextBox Height="35" Margin="0,0,0,20" VerticalContentAlignment="Center" Padding="5,0"/>
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                        <TextBlock Text="Tamaño de existencias*" FontWeight="SemiBold"/>
+                        <TextBox x:Name="txtStock" Height="35" Margin="0,0,0,20" VerticalContentAlignment="Center" Padding="5,0"/>
                     </StackPanel>
                 </Grid>
 
-                <Button Content="Guardar Producto" Background="#1BBF4C" Foreground="White" FontSize="15" FontWeight="Bold"
-                        Width="200" Height="45" Margin="0,20,0,0" HorizontalAlignment="Center">
+                <Button x:Name="btnGuardarProducto" Content="Guardar Producto" Click="btnGuardarProducto_Click" 
+                        Foreground="White" FontSize="15" FontWeight="Bold"
+                        Width="200" Height="45">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="#0F7A2F"/>
+                            <Setter Property="Background" Value="#1BBF4C"/>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#1BBF4C"/>
+                                    <Setter Property="Background" Value="#0F7A2F"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Border Width="200" Height="45" CornerRadius="6" Background="{TemplateBinding Background}">
-                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Border Width="200" Height="40" CornerRadius="6" Margin="0 0 0 0" Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center" 
+                                                  HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
