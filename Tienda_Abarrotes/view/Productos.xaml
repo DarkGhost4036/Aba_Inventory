@@ -6,44 +6,60 @@
         Background="#F4F6F8">
 
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- MENU LATERAL -->
-        <StackPanel Background="#0F7A2F" Grid.Column="0">
-            <TextBlock Text="Aba-Inventory"
-                       Foreground="White"
-                       FontSize="20"
-                       Margin="20"
-                       FontWeight="Bold"/>
+        <Grid Background="#0F7A2F" Grid.Column="0">
 
-            <Button Content="Inicio" Margin="10"
-                    Click="btnInicio_Click"/>
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Text="Aba-Inventory"
+                           Foreground="White"
+                           FontSize="20"
+                           Margin="20"
+                           FontWeight="Bold"/>
 
-            <Button Content="Productos" Margin="10"
-                    Click="btnProductos_Click"/>
+                <Button Content="Inicio" Margin="10"
+                        Click="btnInicio_Click"/>
 
-            <Button Content="Categorias" Margin="10"
-                    Click="btnCategorias_Click"/>
+                <Button Content="Productos" Margin="10"
+                        Click="btnProductos_Click"/>
 
-            <Button Content="Finanzas" Margin="10"
-                    Click="btnFinanzas_Click"/>
+                <Button Content="Categorias" Margin="10"
+                        Click="btnCategorias_Click"/>
 
-            <Button Content="Configuración" Margin="10"
-                    Click="btnConfiguración_Click"/>
+                <Button Content="Finanzas" Margin="10"
+                        Click="btnFinanzas_Click"/>
 
-            <Button Content="+ Agregar Producto"
-                    Background="#1BBF4C"
-                    Foreground="White"
-                    Margin="10"
-                    Height="40"
-                    Click="btnAgregarProducto_Click"/>  
-        </StackPanel>
+                <Button Content="Configuración" Margin="10"
+                        Click="btnConfiguración_Click"/>
 
-        <!-- CONTENIDO -->
+                <Button Content="Gestion de Usuarios" Margin="10"
+                        Click="btnManejadorUsuarios_Click"/>
+
+                <Button Content="+ Agregar Producto"
+                        Background="#1BBF4C"
+                        Foreground="White"
+                        Margin="10,20,10,10"
+                        Height="40"
+                        Click="btnAgregarProducto_Click"/>
+
+                <Button x:Name="BtnEliminarLateral" 
+                        Content="- Eliminar producto" 
+                        Background="#D93025" 
+                        Foreground="White" 
+                        Margin="10,0,10,10" 
+                        Height="40" 
+                        FontWeight="Bold" 
+                        Click="BtnEliminarLateral_Click"/>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Bottom" Margin="10,0,0,15">
+                <Button Content="Log out" Foreground="White" Background="Transparent" BorderThickness="0" Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+
         <Grid Grid.Column="1" Margin="20">
 
             <Grid.RowDefinitions>
@@ -57,8 +73,8 @@
                        Margin="0,0,0,20"/>
 
             <Image Source="https://via.placeholder.com/100"
-                           Width="100"
-                           Height="100"/>
+                   Width="100"
+                   Height="100"/>
 
             <DataGrid Grid.Row="1"
                       ItemsSource="{Binding ListaProductos}"
@@ -70,7 +86,6 @@
 
                 <DataGrid.Columns>
 
-                    <!-- ✅ Imagen -->
                     <DataGridTemplateColumn Header="Imagen" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -81,65 +96,57 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <!-- Estado con estilo -->
                     <DataGridTemplateColumn Header="Estado" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Padding="5"
-                            CornerRadius="10"
-                            HorizontalAlignment="Center"
-                            Background="Green">
+                                        CornerRadius="10"
+                                        HorizontalAlignment="Center"
+                                        Background="Green">
                                     <TextBlock Text="{Binding Estado}"
-                                   Foreground="White"
-                                   HorizontalAlignment="Center"/>
+                                               Foreground="White"
+                                               HorizontalAlignment="Center"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <!-- Nombre -->
                     <DataGridTemplateColumn Header="Producto" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Nombre}"
-                       TextWrapping="Wrap"/>
+                                           TextWrapping="Wrap"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <!-- Stock -->
                     <DataGridTextColumn Header="Stock"
-                            Binding="{Binding Stock}"
-                            Width="50"/>
+                                        Binding="{Binding Stock}"
+                                        Width="50"/>
 
-                    <!-- Categoria -->
                     <DataGridTextColumn Header="Categoría"
-                            Binding="{Binding Categoria}"
-                            Width="80"/>
+                                        Binding="{Binding Categoria}"
+                                        Width="80"/>
 
                     <DataGridTemplateColumn Header="Cantidad" Width="180">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
-                                    <!-- Botón - -->
                                     <Button Content="-" Width="30" Click="btn_menos_Click"/>
 
-
-                                    <!-- Caja de texto -->
                                     <TextBox x:Name="txtCantidad"
                                              Width="50"
                                              HorizontalContentAlignment="Center"
                                              Margin="5,0"
-                                             Text="0"/>         
-                                    <!-- Botón + -->
+                                             Text="0"/>
                                     <Button Content="+" Width="30" Click="btn_mas_Click"/>
 
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <!-- carrito  -->
+
                     <DataGridTemplateColumn Header="Acción" Width="150">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -152,7 +159,6 @@
                     </DataGridTemplateColumn>
 
                 </DataGrid.Columns>
-
             </DataGrid>
         </Grid>
     </Grid>

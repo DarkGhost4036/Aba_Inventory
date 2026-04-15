@@ -82,7 +82,7 @@ namespace Tienda_Abarrotes.Repositorios
                     {
                         user = new UserModel
                         {
-                            Id = reader[0].ToString(),
+                            Id = Convert.ToInt32(reader[0]),
                             UserName = reader[1].ToString(),
                             Password = reader[2].ToString(),
                             Name = reader[3].ToString(),
@@ -143,7 +143,7 @@ namespace Tienda_Abarrotes.Repositorios
                     {
                         users.Add(new UserModel
                         {
-                            Id = reader[0].ToString(),
+                            Id = Convert.ToInt32(reader[0]),
                             UserName = reader[1].ToString(),
                             Password = reader[2].ToString(),
                             Name = reader[3].ToString(),

@@ -56,7 +56,17 @@ namespace Tienda_Abarrotes.View
 
         private void BtnEliminarLateral_Click(object sender, RoutedEventArgs e)
         {
+            BorrarProducto ventana = new BorrarProducto();
+            ventana.Show();
+            this.Close();
 
+        }
+
+        private void btnAgregarProducto_Click(object sender, RoutedEventArgs e)
+        {
+            AgregarProductos ventana = new AgregarProductos();
+            ventana.Show();
+            this.Close();
         }
     }
 
