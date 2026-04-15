@@ -13,6 +13,7 @@ namespace Tienda_Abarrotes.Repositorios
 
         public RepositoryBase()
         {
+
             // Usamos el constructor de conexiones para evitar cualquier error de texto o formato
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
@@ -26,6 +27,7 @@ namespace Tienda_Abarrotes.Repositorios
 
             // C# arma la cadena de texto perfecta automáticamente
             _connectionString = builder.ConnectionString;
+
         }
         protected SqlConnection GetConnection()
         {

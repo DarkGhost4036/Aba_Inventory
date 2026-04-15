@@ -63,6 +63,7 @@ namespace Tienda_Abarrotes.ViewModel
 
         private void AddExecute(object user)
         {
+
             MessageBox.Show(
                 $"UserName: {User?.UserName}\n" +
                 $"Password: {User?.Password}\n" +
@@ -75,6 +76,7 @@ namespace Tienda_Abarrotes.ViewModel
                 string.IsNullOrWhiteSpace(User?.Name) ||
                 string.IsNullOrWhiteSpace(User?.LastName) ||
                 string.IsNullOrWhiteSpace(User?.Email))
+
             {
                 MessageBox.Show("Campos incompletos");
                 return;
@@ -97,7 +99,9 @@ namespace Tienda_Abarrotes.ViewModel
         private bool AddCanExecute(object user)
         {
             // Deshabilita el botón si los campos están vacíos
+
             return true;
+
         }
 
         public ICommand DeleteCommand
