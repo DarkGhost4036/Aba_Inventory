@@ -13,21 +13,24 @@ namespace Tienda_Abarrotes.Repositorios
 
         public RepositoryBase()
         {
-
-            // Usamos el constructor de conexiones para evitar cualquier error de texto o formato
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
-            builder.DataSource = @"LENOVO_LOQ\VSGESTION"; // Tu servidor
-            builder.InitialCatalog = "Tienda_Abarrotes_BD"; // Tu base de datos
-            builder.IntegratedSecurity = true; // Credenciales de Windows
+            // TU IP + INSTANCIA
+            builder.DataSource = @"10.101.122.15\VSGESTION";
 
-            // Aquí están los dos seguros anti-errores SSL
+            // Nombre de la base de datos en tu compu
+            builder.InitialCatalog = "Tienda_Abarrotes_BD";
+
+            // LOS DATOS DEL USUARIO QUE CREASTE
+            builder.IntegratedSecurity = false; // IMPORTANTE: Debe ser false
+            builder.UserID = "usuario_equipo";
+            builder.Password = "Abarrotes2026";
+
+            // Configuraciones extra para evitar errores de red escolar
             builder.Encrypt = false;
             builder["TrustServerCertificate"] = true;
 
-            // C# arma la cadena de texto perfecta automáticamente
             _connectionString = builder.ConnectionString;
-
         }
         protected SqlConnection GetConnection()
         {
