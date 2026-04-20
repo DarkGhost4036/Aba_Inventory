@@ -20,7 +20,7 @@ namespace Tienda_Abarrotes.ViewModel
 
         private ObservableCollection<UserModel> _users;
         private UserModel _user;
-        private IUserRepository userRepository;
+        private new IUserRepository userRepository;
 
         public UserModel User
         {
