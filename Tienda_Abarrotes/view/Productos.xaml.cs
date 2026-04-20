@@ -50,43 +50,8 @@ namespace Tienda_Abarrotes.View
             this.Close(); // cierra Login
         }
 
-        private void btn_mas_Click(object sender, RoutedEventArgs e)
-        {
-            Button btn = sender as Button;
 
-            StackPanel panel = btn.Parent as StackPanel;
-            TextBox txt = panel.Children[1] as TextBox;
-
-            if (int.TryParse(txt.Text, out int cantidad))
-            {
-                cantidad++;
-                txt.Text = cantidad.ToString();
-            }
-            else
-            {
-                txt.Text = "0";
-            }
-        }
-
-        private void btn_menos_Click(object sender, RoutedEventArgs e)
-        {
-            Button btn = sender as Button;
-
-            StackPanel panel = btn.Parent as StackPanel;
-            TextBox txt = panel.Children[1] as TextBox;
-
-            if (int.TryParse(txt.Text, out int cantidad))
-            {
-                if (cantidad > 0)
-                    cantidad--;
-
-                txt.Text = cantidad.ToString();
-            }
-            else
-            {
-                txt.Text = "0";
-            }
-        }
+        
 
         public void btnManejadorUsuarios(object sender, RoutedEventArgs e)
         {
@@ -99,6 +64,11 @@ namespace Tienda_Abarrotes.View
             BorrarProducto ventana = new BorrarProducto();
             ventana.Show();
             this.Close();
+
+        }
+
+        private void BtnCarrito_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

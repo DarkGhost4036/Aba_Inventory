@@ -1,6 +1,8 @@
+using System.ComponentModel;
+
 namespace AbaInventory.Models
 {
-    public class Producto
+    public class Producto : INotifyPropertyChanged
     {
         public string Nombre { get; set; }
         public string Estado { get; set; }
@@ -8,10 +10,22 @@ namespace AbaInventory.Models
         public string Categoria { get; set; }
         public int Tiendas { get; set; }
         public string Imagen { get; set; }
+
         public string TiendasTexto => Tiendas == 1 ? "1 store" : $"{Tiendas} stores";
-        public Producto()
+
+        private int cantidad;
+        public int Cantidad
         {
+            get => cantidad;
+            set
+            {
+                cantidad = value;
+                OnPropertyChanged(nameof(Cantidad));
+            }
         }
+
+        public Producto() { }
+
         public Producto(string nombre, string categoria, int stock, string estado, int tiendas)
         {
             Nombre = nombre;
@@ -20,5 +34,9 @@ namespace AbaInventory.Models
             Categoria = categoria;
             Tiendas = tiendas;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string name)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

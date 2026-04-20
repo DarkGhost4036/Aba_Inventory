@@ -11,6 +11,8 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        
+        
 
         <Grid Background="#0F7A2F" Grid.Column="0">
 
@@ -68,16 +70,43 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Producto"
-                       FontSize="26"
-                       FontWeight="Bold"
-                       Margin="0,0,0,20"/>
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Texto -->
+                <TextBlock Text="Producto"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"/>
+
+                <!-- Total -->
+                <TextBox Text="{Binding Total}"
+                         Grid.Column="1"
+                         Width="100"
+                         Height="30"
+                         IsReadOnly="True"/>
+
+                <!-- Carrito -->
+                <Button Grid.Column="2"
+                        Content="🛒"
+                        FontSize="35"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Margin="10,0,0,0"
+                        Click="BtnCarrito_Click"/>  
+            </Grid>
 
             <Image Source="https://via.placeholder.com/100"
                    Width="100"
                    Height="100"/>
 
-            <DataGrid Grid.Row="1"
+            <DataGrid x:Name="dataGridProductos"
+                      Grid.Row="1"
                       ItemsSource="{Binding ListaProductos}"
                       AutoGenerateColumns="False"
                       RowHeight="60"
@@ -134,15 +163,18 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
-                                    <Button Content="-" Width="30" Click="btn_menos_Click"/>
+                                    <Button Content="-" Width="30"
+                                            Command="{Binding DataContext.RestarCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding}"/>
 
-                                    <TextBox x:Name="txtCantidad"
+                                    <TextBox Text="{Binding Cantidad}"
                                              Width="50"
                                              HorizontalContentAlignment="Center"
-                                             Margin="5,0"
-                                             Text="0"/>
-                                    <Button Content="+" Width="30" Click="btn_mas_Click"/>
+                                             Margin="5,0"/>
 
+                                    <Button Content="+" Width="30"
+                                            Command="{Binding DataContext.SumarCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -154,11 +186,11 @@
                                 <Button Content="🛒 Agregar"
                                         Background="#1BBF4C"
                                         Foreground="White"
-                                        Command="{Binding AgregarCarritoCommand}"/>
+                                        Command="{Binding DataContext.AgregarCarritoCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

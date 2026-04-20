@@ -17,7 +17,7 @@ namespace Tienda_Abarrotes.Repositorios
             // Usamos el constructor de conexiones para evitar cualquier error de texto o formato
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
-            builder.DataSource = @"LENOVO_LOQ\VSGESTION"; // Tu servidor
+            builder.DataSource = @"YAIR-ESP\VSGESTION"; // Tu servidor el mio e YAIR-ESP
             builder.InitialCatalog = "Tienda_Abarrotes_BD"; // Tu base de datos
             builder.IntegratedSecurity = true; // Credenciales de Windows
 
