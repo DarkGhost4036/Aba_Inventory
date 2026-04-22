@@ -95,11 +95,34 @@ namespace Tienda_Abarrotes.ViewModel
         private void Login(object obj)
         {
             
+            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+            {
+                ErrorMessage = "Por favor, ingresa usuario y contraseña.";
+                return;
+            }
 
-            Productos ventana = new Productos();
-            ventana.Show();
-            Application.Current.Windows[0]?.Close();
+            try
+            {
+                
+                bool isValidUser = UserRepository.AuthenticateUser(new System.Net.NetworkCredential(Username, Password));
 
+                if (isValidUser)
+                {
+                    Productos ventana = new Productos();
+                    ventana.Show();
+
+                    
+                    Application.Current.MainWindow.Close();
+                }
+                else
+                {
+                    ErrorMessage = "Usuario o contraseña incorrectos en la base de datos.";
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = "Error de conexión: " + ex.Message;
+            }
         }
 
 

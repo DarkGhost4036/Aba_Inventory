@@ -66,6 +66,7 @@
     <Compile Include="Repositorios\DatabaseConnectionTester.cs" />
     <Compile Include="Repositorios\RepositoryBase.cs" />
     <Compile Include="Repositorios\UserRepository.cs" />
+    <Compile Include="Repositorios\UsuarioRepository.cs" />
     <Compile Include="ViewModel\ManejoUsuariosViewModel.cs" />
     <Compile Include="ViewModel\ProductoViewModel.cs" />
     <Compile Include="ViewModel\RegistroViewModel.cs" />
