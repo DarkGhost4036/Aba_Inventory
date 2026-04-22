@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using Tienda_Abarrotes.Model;
@@ -92,15 +93,7 @@ namespace Tienda_Abarrotes.ViewModel
         }
 
 
-        private void Login(object obj)
-        {
-            
 
-            Productos ventana = new Productos();
-            ventana.Show();
-            Application.Current.Windows[0]?.Close();
-
-        }
 
 
         private void OpenRegistro(object obj)
