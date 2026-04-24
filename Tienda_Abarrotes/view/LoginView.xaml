@@ -146,18 +146,20 @@
                                         AlignmentX="Left"/>
                         </TextBox.Background>
                     </TextBox>
-                    <TextBlock Text="Password"
-                               Foreground="Black"
-                               FontSize="12"
-                               FontWeight="Medium"
-                               Margin="0,15,0,0"/>
-                    <customcontrol:BindablePasswordBox
-                        Password="{Binding Password,Mode=TwoWay,
-                        UpdateSourceTrigger=PropertyChanged}"
-                        Height="40"
-                        Margin="0,5,0,0">
-                    </customcontrol:BindablePasswordBox>
-                    
+                    <PasswordBox x:Name="txtPassword"
+                     PasswordChanged="txtPassword_PasswordChanged"
+                     Background="Transparent"
+                     FontSize="13"
+                     FontWeight="Medium"
+                     Foreground="Black"
+                     CaretBrush="LightGray"
+                     BorderBrush="DarkGray"
+                     BorderThickness="0,0,0,2"
+                     Height="40"
+                     VerticalContentAlignment="Center"
+                     Margin="0,5,0,0"
+                     Padding="20,0,0,0" />  
+
                     <!-- Mensaje de error cuando se inicie mal la seción-->
                     <TextBlock Text="{Binding ErrorMessage}"
                                Foreground= "#D7596D"
@@ -198,6 +200,7 @@
                     </Button>
                     <Button x:Name="btnLogin"
                             Command="{Binding LoginCommand}"
+                            CommandParameter="Binding ElementName=txtPassword"
                             BorderThickness="0"
                             Content="Iniciar sesión"
                             Foreground="White"

@@ -16,7 +16,7 @@ namespace Tienda_Abarrotes.Repositorios
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
             // TU IP + INSTANCIA
-            builder.DataSource = "10.101.122.15, 1433";
+            builder.DataSource = "localhost, 1433";
 
             // Nombre de la base de datos en tu compu
             builder.InitialCatalog = "Tienda_Abarrotes_BD";

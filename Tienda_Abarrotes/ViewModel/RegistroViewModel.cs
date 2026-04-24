@@ -20,7 +20,7 @@ namespace Tienda_Abarrotes.ViewModel
 
         private ObservableCollection<UserModel> _users;
         private UserModel _user;
-        private new IUserRepository userRepository;
+        private readonly IUserRepository userRepository;
 
         public UserModel User
         {
@@ -49,6 +49,7 @@ namespace Tienda_Abarrotes.ViewModel
         {
             userRepository = new UserRepository();
             _user = new UserModel();
+            ActualizarListaUsuarios();
         }
 
         // --- Commands ---
@@ -96,11 +97,14 @@ namespace Tienda_Abarrotes.ViewModel
             User = new UserModel(); // limpiar formulario
         }
 
-        private bool AddCanExecute(object user)
+       private bool AddCanExecute(object user)
         {
             // Deshabilita el botón si los campos están vacíos
 
-            return true;
+            return !string.IsNullOrWhiteSpace(User?.UserName) &&
+                   !string.IsNullOrWhiteSpace(User?.Name) &&
+                   !string.IsNullOrWhiteSpace(User?.LastName) &&
+                   !string.IsNullOrWhiteSpace(User?.Email);
 
         }
 
@@ -144,6 +148,11 @@ namespace Tienda_Abarrotes.ViewModel
         {
             // Verifica que el objeto user no sea nulo y tenga un Id válido
             return true;
+        }
+        private void ActualizarListaUsuarios()
+        {
+            var listaBD = userRepository.GetAllUsers();
+            Users = new ObservableCollection<UserModel>(listaBD);
         }
     }
 }
