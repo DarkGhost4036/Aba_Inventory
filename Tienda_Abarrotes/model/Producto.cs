@@ -8,11 +8,9 @@ namespace AbaInventory.Models
         public string Estado { get; set; }
         public int Stock { get; set; }
         public string Categoria { get; set; }
-        public int Tiendas { get; set; }
         public string Imagen { get; set; }
 
-        public string TiendasTexto => Tiendas == 1 ? "1 store" : $"{Tiendas} stores";
-
+     
         private int cantidad;
         public int Cantidad
         {
@@ -32,7 +30,7 @@ namespace AbaInventory.Models
             Estado = estado;
             Stock = stock;
             Categoria = categoria;
-            Tiendas = tiendas;
+           
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -60,6 +60,8 @@
     <Compile Include="customcontrols\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\CarritoItem.cs" />
+    <Compile Include="Model\ConvertirBytesImagen.cs" />
     <Compile Include="Model\Producto.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Model\IUserRepository.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Repositorios\RepositoryBase.cs" />
     <Compile Include="Repositorios\UserRepository.cs" />
     <Compile Include="Repositorios\UsuarioRepository.cs" />
+    <Compile Include="ViewModel\CarritoViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ManejoUsuariosViewModel.cs" />
     <Compile Include="ViewModel\ProductoViewModel.cs" />
@@ -89,6 +92,9 @@
     </Compile>
     <Compile Include="View\RegistroView.xaml.cs">
       <DependentUpon>RegistroView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VentanaCarritoView.xaml.cs">
+      <DependentUpon>VentanaCarritoView.xaml</DependentUpon>
     </Compile>
     <Page Include="customcontrols\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
@@ -121,6 +127,10 @@
     <Page Include="View\RegistroView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\VentanaCarritoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

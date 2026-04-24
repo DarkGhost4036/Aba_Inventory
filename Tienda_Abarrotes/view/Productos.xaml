@@ -98,7 +98,7 @@
                         BorderThickness="0"
                         Cursor="Hand"
                         Margin="10,0,0,0"
-                        Click="BtnCarrito_Click"/>  
+                        Click="VerCarrito_Click"/>  
             </Grid>
 
             <Image Source="https://via.placeholder.com/100"

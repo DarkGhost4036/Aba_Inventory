@@ -1,6 +1,8 @@
 ﻿using AbaInventory.ViewModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using Tienda_Abarrotes.ViewModel;
 
 namespace Tienda_Abarrotes.View
@@ -67,9 +69,35 @@ namespace Tienda_Abarrotes.View
 
         }
 
-        private void BtnCarrito_Click(object sender, RoutedEventArgs e)
+        private void VerCarrito_Click(object sender, RoutedEventArgs e)
         {
+            // Creamos la ventana de visualización del carrito
+            var ventanaCarrito = new VentanaCarritoView();
 
+            // Le pasamos el contexto de datos actual (que ya tiene los productos agregados)
+            // 'this.DataContext' es tu ProductosViewModel
+            ventanaCarrito.DataContext = this.DataContext;
+
+            ventanaCarrito.ShowDialog();
+        } 
+      
+        public BitmapImage ConvertirBytesAImagen(byte[] datosBinarios)
+        {
+            if (datosBinarios == null || datosBinarios.Length == 0) return null;
+
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(datosBinarios))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze(); 
+            return image;
         }
     }
 }

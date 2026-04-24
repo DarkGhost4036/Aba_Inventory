@@ -22,6 +22,7 @@ namespace Tienda_Abarrotes.View
         public AgregarProductos()
         {
             InitializeComponent();
+           
 
         }
 
