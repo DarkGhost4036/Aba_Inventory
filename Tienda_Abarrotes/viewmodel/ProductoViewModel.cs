@@ -1,29 +1,26 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.Win32; // <-- MUY IMPORTANTE PARA QUE FUNCIONE OpenFileDialog
 using Tienda_Abarrotes.Model;
 using Tienda_Abarrotes.Repositorios;
-
 
 namespace Tienda_Abarrotes.ViewModel
 {
     public class ProductoViewModel : INotifyPropertyChanged
     {
         private readonly IProductoRepository _productoRepository;
-        // --- MEMORIA COMPARTIDA ---
-        // Esto es vital para que la ventana de Agregar, Mostrar y Eliminar vean los mismos datos
-        private static ObservableCollection<Producto> _listaProductos;      
+
+        private static ObservableCollection<Producto> _listaProductos;
         public ObservableCollection<Producto> ListaProductos
         {
             get { return _listaProductos; }
             set { _listaProductos = value; OnPropertyChanged(nameof(ListaProductos)); }
         }
 
-        // --- PROPIEDADES PARA AGREGAR PRODUCTO ---
         private string _nombre;
         public string Nombre
         {
@@ -52,7 +49,6 @@ namespace Tienda_Abarrotes.ViewModel
             set { _rutaImagen = value; OnPropertyChanged(nameof(RutaImagen)); }
         }
 
-        // --- PROPIEDADES DEL CARRITO ---
         private double total;
         public double Total
         {
@@ -64,21 +60,17 @@ namespace Tienda_Abarrotes.ViewModel
             }
         }
 
-        // --- COMANDOS UNIFICADOS ---
         public ICommand SeleccionarImagenCommand { get; }
         public ICommand GuardarProductoCommand { get; }
         public ICommand SumarCommand { get; }
         public ICommand RestarCommand { get; }
         public ICommand AgregarCarritoCommand { get; }
 
-        // --- CONSTRUCTOR ---
         public ProductoViewModel()
         {
-            // Inicialización segura de la memoria global
             _productoRepository = new ProductoRepository();
-            CargarProductosBD();         
+            CargarProductosBD();
 
-            // Enlace de los comandos con sus respectivos métodos
             GuardarProductoCommand = new RelayCommand(GuardarProducto);
             SeleccionarImagenCommand = new RelayCommand(SeleccionarImagen);
             SumarCommand = new RelayCommand(Sumar);
@@ -86,51 +78,32 @@ namespace Tienda_Abarrotes.ViewModel
             AgregarCarritoCommand = new RelayCommand(Agregar);
         }
 
-        // --- LÓGICA DE MÉTODOS ---
-
-        // Método para agregar al inventario
         private void SeleccionarImagen(object obj)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Seleccionar imagen del producto";
-            dialog.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png"; // Solo permitir formatos comunes de imagen
-            // Esto mustra una imgaen de vista previa, después de que el usuario haya cargado una imagen
+            dialog.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png";
+
             if (dialog.ShowDialog() == true)
             {
-                RutaImagen = dialog.FileName;
+                RutaImagen = dialog.FileName; // Guardamos la ruta absoluta real
             }
         }
-         private void CargarProductosBD()
+
+        private void CargarProductosBD()
         {
             var productosBD = _productoRepository.GetAllProductos();
             ListaProductos = new ObservableCollection<Producto>(productosBD);
         }
+
         private void GuardarProducto(object obj)
         {
-            string rutaFinalBD = "/Imagen/default.png"; // Imagen por defecto en caso de que no se seleccione una imagen
-            // Cuando el usuario haya seleccionado una imagen, se copia a la carpeta "Images" del proyecto
+            byte[] imagenBytes = null;
+
+            // Si el usuario seleccionó una imagen y el archivo existe, lo convertimos a bytes directo
             if (!string.IsNullOrEmpty(RutaImagen) && File.Exists(RutaImagen))
             {
-                // Se obtiene la ruta de la carpeta "Images"
-                string directorioProyecto = AppDomain.CurrentDomain.BaseDirectory;
-                string carpetaImages = Path.Combine(directorioProyecto, "Images");
-
-                // Si la carpeta "Images" no existe, entonces se crea
-                if (!Directory.Exists(carpetaImages))
-                {
-                    Directory.CreateDirectory(carpetaImages);
-                }
-
-                // Nombre único para evitar que imágenes con el mismo nombre choquen
-                string extension = Path.GetExtension(RutaImagen);
-                string nombreUnico = DateTime.Now.Ticks.ToString() + extension;
-                string rutaDestino = Path.Combine(carpetaImages, nombreUnico);
-
-                // Se copia el archivo
-                File.Copy(RutaImagen, rutaDestino);
-
-                // Esta es la ruta que se guardará en la base de datos
-                rutaFinalBD = "/Images/" + nombreUnico;
+                imagenBytes = File.ReadAllBytes(RutaImagen);
             }
 
             Producto nuevoProducto = new Producto
@@ -139,25 +112,26 @@ namespace Tienda_Abarrotes.ViewModel
                 Stock = this.Stock,
                 Categoria = this.Codigo,
                 Estado = this.Stock > 0 ? "Activo" : "Agotado",
-                Imagen = rutaFinalBD,
+                Imagen = imagenBytes, // Se van los bytes directos a la BD
                 Tiendas = 1
             };
 
             _productoRepository.Add(nuevoProducto);
             MessageBox.Show("¡Producto agregado exitosamente!");
 
-            CargarProductosBD(); // Refrescar la lista para mostrar el nuevo producto
+            CargarProductosBD();
 
+           
             Nombre = string.Empty;
             Stock = 0;
             Codigo = string.Empty;
             RutaImagen = null;
         }
 
-        // Métodos para el punto de venta/carrito
         private void Sumar(object obj)
         {
-            if (obj is Producto p)
+        
+            if (obj is Producto p && p.Cantidad < p.Stock)
             {
                 p.Cantidad++;
             }
@@ -175,12 +149,13 @@ namespace Tienda_Abarrotes.ViewModel
         {
             if (obj is Producto p && p.Cantidad > 0)
             {
-                Total += p.Cantidad;
+               
+                double precioSimulado = 15.50;
+                Total += (p.Cantidad * precioSimulado);
                 p.Cantidad = 0;
             }
         }
 
-        // --- NOTIFICACIÓN A LA VISTA ---
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

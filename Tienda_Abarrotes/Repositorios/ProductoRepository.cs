@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using Tienda_Abarrotes.Model;
 
 namespace Tienda_Abarrotes.Repositorios
-{    
+{
     internal class ProductoRepository : RepositoryBase, IProductoRepository
     {
         public void Add(Producto producto)
@@ -15,7 +15,6 @@ namespace Tienda_Abarrotes.Repositorios
                 connection.Open();
                 command.Connection = connection;
 
-                
                 command.CommandText = @"INSERT INTO Producto 
                                         (Nombre, Estado, Stock, Categoria, Imagen)
                                         VALUES (@Nombre, @Estado, @Stock, @Categoria, @Imagen)";
@@ -24,8 +23,10 @@ namespace Tienda_Abarrotes.Repositorios
                 command.Parameters.AddWithValue("@Estado", producto.Estado);
                 command.Parameters.AddWithValue("@Stock", producto.Stock);
                 command.Parameters.AddWithValue("@Categoria", producto.Categoria);
-                // DBNull.Value se utiiza por si la imagen viene vacía
-                command.Parameters.AddWithValue("@Imagen", string.IsNullOrEmpty(producto.Imagen) ? (object)DBNull.Value : producto.Imagen);
+
+                // CORRECCIÓN 1: Aquí ya está la línea explícita para el VARBINARY
+                command.Parameters.Add("@Imagen", System.Data.SqlDbType.VarBinary).Value =
+                    (producto.Imagen != null && producto.Imagen.Length > 0) ? (object)producto.Imagen : DBNull.Value;
 
                 command.ExecuteNonQuery();
             }
@@ -53,7 +54,6 @@ namespace Tienda_Abarrotes.Repositorios
                 connection.Open();
                 command.Connection = connection;
 
-                // Faltaba agregar Precio al UPDATE
                 command.CommandText = @"UPDATE Producto 
                                         SET Nombre = @Nombre,
                                             Estado = @Estado,
@@ -67,7 +67,10 @@ namespace Tienda_Abarrotes.Repositorios
                 command.Parameters.AddWithValue("@Categoria", producto.Categoria);
                 command.Parameters.AddWithValue("@Stock", producto.Stock);
                 command.Parameters.AddWithValue("@Estado", producto.Estado);
-                command.Parameters.AddWithValue("@Imagen", string.IsNullOrEmpty(producto.Imagen) ? (object)DBNull.Value : producto.Imagen);
+
+                // Este lo habías puesto perfecto
+                command.Parameters.Add("@Imagen", System.Data.SqlDbType.VarBinary).Value =
+                    (producto.Imagen != null && producto.Imagen.Length > 0) ? (object)producto.Imagen : DBNull.Value;
 
                 command.ExecuteNonQuery();
             }
@@ -92,8 +95,8 @@ namespace Tienda_Abarrotes.Repositorios
                             Stock = Convert.ToInt32(reader["Stock"]),
                             Estado = reader["Estado"].ToString(),
 
-                            // Se valida si la imagen es nula en la base de datos
-                            Imagen = reader["Imagen"] != DBNull.Value ? reader["Imagen"].ToString() : string.Empty,
+                            // CORRECCIÓN 2: En el SELECT sacamos la imagen del 'reader'
+                            Imagen = reader["Imagen"] != DBNull.Value ? (byte[])reader["Imagen"] : null
                         });
                     }
                 }
