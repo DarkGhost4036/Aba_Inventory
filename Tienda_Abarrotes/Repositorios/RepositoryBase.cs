@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 
-ng System.Data.SqlClient;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
