@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="Model\CarritoItem.cs" />
     <Compile Include="Model\ConvertirBytesImagen.cs" />
+    <Compile Include="Model\IProductoRepository.cs" />
     <Compile Include="Model\Producto.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Model\IUserRepository.cs" />

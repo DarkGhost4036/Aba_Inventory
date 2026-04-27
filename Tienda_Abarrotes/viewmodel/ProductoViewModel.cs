@@ -1,22 +1,26 @@
-﻿using Tienda_Abarrotes.Model;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using Tienda_Abarrotes.Model;
+using Tienda_Abarrotes.Repositorios;
 
 
 namespace Tienda_Abarrotes.ViewModel
 {
     public class ProductoViewModel : INotifyPropertyChanged
     {
+        private readonly IProductoRepository _productoRepository;
         // --- MEMORIA COMPARTIDA ---
-        // Vital para que la ventana de Agregar, Mostrar y Eliminar vean los mismos datos
-        private static ObservableCollection<Producto> _listaProductosCompartida;
-
+        // Esto es vital para que la ventana de Agregar, Mostrar y Eliminar vean los mismos datos
+        private static ObservableCollection<Producto> _listaProductos;      
         public ObservableCollection<Producto> ListaProductos
         {
-            get { return _listaProductosCompartida; }
-            set { _listaProductosCompartida = value; OnPropertyChanged(nameof(ListaProductos)); }
+            get { return _listaProductos; }
+            set { _listaProductos = value; OnPropertyChanged(nameof(ListaProductos)); }
         }
 
         // --- PROPIEDADES PARA AGREGAR PRODUCTO ---
@@ -41,6 +45,13 @@ namespace Tienda_Abarrotes.ViewModel
             set { _codigo = value; OnPropertyChanged(nameof(Codigo)); }
         }
 
+        private string _rutaImagen;
+        public string RutaImagen
+        {
+            get { return _rutaImagen; }
+            set { _rutaImagen = value; OnPropertyChanged(nameof(RutaImagen)); }
+        }
+
         // --- PROPIEDADES DEL CARRITO ---
         private double total;
         public double Total
@@ -54,6 +65,7 @@ namespace Tienda_Abarrotes.ViewModel
         }
 
         // --- COMANDOS UNIFICADOS ---
+        public ICommand SeleccionarImagenCommand { get; }
         public ICommand GuardarProductoCommand { get; }
         public ICommand SumarCommand { get; }
         public ICommand RestarCommand { get; }
@@ -63,19 +75,12 @@ namespace Tienda_Abarrotes.ViewModel
         public ProductoViewModel()
         {
             // Inicialización segura de la memoria global
-            if (_listaProductosCompartida == null)
-            {
-                _listaProductosCompartida = new ObservableCollection<Producto>
-                {
-                    new Producto { Nombre="Pepsi Lata 235 ml", Categoria="Pepsi", Stock=10, Estado="Activo", Imagen="/Images/pepsi.png", Tiendas=5 },
-                    new Producto { Nombre="Coca-Cola Sin Azucar Lata 235 ml", Categoria="Coca-Cola", Stock=28, Estado="Activo", Imagen="/Images/cocaSinAzucar.png", Tiendas=3 },
-                    new Producto { Nombre="Sabritas 45 g", Categoria="Sabritas", Stock=0, Estado="Agotado", Imagen="/Images/sabritasOriginales.png", Tiendas=2 },
-                    new Producto { Nombre="Donas Bimbo 62 g", Categoria="Bimbo", Stock=1, Estado="Bajo stock", Imagen="/Images/donasBimbo.png", Tiendas=1 }
-                };
-            }
+            _productoRepository = new ProductoRepository();
+            CargarProductosBD();         
 
             // Enlace de los comandos con sus respectivos métodos
             GuardarProductoCommand = new RelayCommand(GuardarProducto);
+            SeleccionarImagenCommand = new RelayCommand(SeleccionarImagen);
             SumarCommand = new RelayCommand(Sumar);
             RestarCommand = new RelayCommand(Restar);
             AgregarCarritoCommand = new RelayCommand(Agregar);
@@ -83,25 +88,70 @@ namespace Tienda_Abarrotes.ViewModel
 
         // --- LÓGICA DE MÉTODOS ---
 
-        // Método para agregar al inventario (Tu código)
+        // Método para agregar al inventario
+        private void SeleccionarImagen(object obj)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Seleccionar imagen del producto";
+            dialog.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png"; // Solo permitir formatos comunes de imagen
+            // Esto mustra una imgaen de vista previa, después de que el usuario haya cargado una imagen
+            if (dialog.ShowDialog() == true)
+            {
+                RutaImagen = dialog.FileName;
+            }
+        }
+         private void CargarProductosBD()
+        {
+            var productosBD = _productoRepository.GetAllProductos();
+            ListaProductos = new ObservableCollection<Producto>(productosBD);
+        }
         private void GuardarProducto(object obj)
         {
+            string rutaFinalBD = "/Imagen/default.png"; // Imagen por defecto en caso de que no se seleccione una imagen
+            // Cuando el usuario haya seleccionado una imagen, se copia a la carpeta "Images" del proyecto
+            if (!string.IsNullOrEmpty(RutaImagen) && File.Exists(RutaImagen))
+            {
+                // Se obtiene la ruta de la carpeta "Images"
+                string directorioProyecto = AppDomain.CurrentDomain.BaseDirectory;
+                string carpetaImages = Path.Combine(directorioProyecto, "Images");
+
+                // Si la carpeta "Images" no existe, entonces se crea
+                if (!Directory.Exists(carpetaImages))
+                {
+                    Directory.CreateDirectory(carpetaImages);
+                }
+
+                // Nombre único para evitar que imágenes con el mismo nombre choquen
+                string extension = Path.GetExtension(RutaImagen);
+                string nombreUnico = DateTime.Now.Ticks.ToString() + extension;
+                string rutaDestino = Path.Combine(carpetaImages, nombreUnico);
+
+                // Se copia el archivo
+                File.Copy(RutaImagen, rutaDestino);
+
+                // Esta es la ruta que se guardará en la base de datos
+                rutaFinalBD = "/Images/" + nombreUnico;
+            }
+
             Producto nuevoProducto = new Producto
             {
                 Nombre = this.Nombre,
                 Stock = this.Stock,
                 Categoria = this.Codigo,
                 Estado = this.Stock > 0 ? "Activo" : "Agotado",
-                Imagen = "https://via.placeholder.com/50",
+                Imagen = rutaFinalBD,
                 Tiendas = 1
             };
 
-            ListaProductos.Add(nuevoProducto);
+            _productoRepository.Add(nuevoProducto);
             MessageBox.Show("¡Producto agregado exitosamente!");
+
+            CargarProductosBD(); // Refrescar la lista para mostrar el nuevo producto
 
             Nombre = string.Empty;
             Stock = 0;
             Codigo = string.Empty;
+            RutaImagen = null;
         }
 
         // Métodos para el punto de venta/carrito

@@ -66,6 +66,15 @@
                     <StackPanel Grid.Column="1" Margin="10,0,0,0">
                         <TextBlock Text="Tamaño de existencias*" FontWeight="SemiBold"/>
                         <TextBox x:Name="txtStock" Text="{Binding Stock, UpdateSourceTrigger=PropertyChanged}" Height="35" Margin="0,0,0,20" VerticalContentAlignment="Center" Padding="5,0"/>
+
+                        <TextBlock Text="Imagen del Producto" FontWeight="SemiBold"/>
+                        <Button Content="Seleccionar Imagen" Command="{Binding SeleccionarImagenCommand}" 
+                                Height="30" Width="150" HorizontalAlignment="Left" Margin="0,5,0,15" 
+                                Background="#E8F0FE" Foreground="#1967D2" FontWeight="SemiBold" BorderThickness="0"/>
+
+                        <Border BorderBrush="LightGray" BorderThickness="1" Width="100" Height="100" HorizontalAlignment="Left" CornerRadius="4">
+                            <Image Source="{Binding RutaImagen}" Stretch="Uniform" Margin="2"/>
+                        </Border>
                     </StackPanel>
                 </Grid>
 
