@@ -9,11 +9,11 @@ namespace Tienda_Abarrotes.Model
         public string Estado { get; set; }
         public int Stock { get; set; }
         public string Categoria { get; set; }
-        public string Imagen { get; set; }
+        public byte[] Imagen { get; set; }
         public int Tiendas { get; set; }
         public bool IsSelected { get; set; }
 
-        public string TiendasTexto => Tiendas == 1 ? "1 store" : $"{Tiendas} stores";
+       
 
         // Propiedad para la cantidad en el carrito, con notificación de cambio
 
@@ -31,13 +31,13 @@ namespace Tienda_Abarrotes.Model
         // --- CONSTRUCTORES ---
         public Producto() { }
 
-        public Producto(string nombre, string categoria, int stock, string estado, int tiendas)
+        public Producto(string nombre, string categoria, int stock, string estado)
         {
             Nombre = nombre;
             Estado = estado;
             Stock = stock;
             Categoria = categoria;
-            Tiendas = tiendas;
+      
         }
 
         // --- EVENTO DE NOTIFICACIÓN ---
