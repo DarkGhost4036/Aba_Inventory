@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Microsoft.Win32; // <-- MUY IMPORTANTE PARA QUE FUNCIONE OpenFileDialog
 using Tienda_Abarrotes.Model;
 using Tienda_Abarrotes.Repositorios;
+using System.Linq;
 
 namespace Tienda_Abarrotes.ViewModel
 {
@@ -20,6 +21,17 @@ namespace Tienda_Abarrotes.ViewModel
             get { return _listaProductos; }
             set { _listaProductos = value; OnPropertyChanged(nameof(ListaProductos)); }
         }
+
+
+        // <-- para el carrito 
+        public static ObservableCollection<Producto> _carritoProductos;
+        public ObservableCollection<Producto> CarritoProductos
+        {
+            get { return _carritoProductos; }
+            set { _carritoProductos = value; OnPropertyChanged(nameof(CarritoProductos)); }
+        }
+
+
 
         private string _nombre;
         public string Nombre
@@ -68,6 +80,11 @@ namespace Tienda_Abarrotes.ViewModel
 
         public ProductoViewModel()
         {
+
+            // <-- para el carrito 
+            if (_listaProductos == null) _listaProductos = new ObservableCollection<Producto>();
+            if (_carritoProductos == null) _carritoProductos = new ObservableCollection<Producto>();
+
             _productoRepository = new ProductoRepository();
             CargarProductosBD();
 
@@ -93,7 +110,12 @@ namespace Tienda_Abarrotes.ViewModel
         private void CargarProductosBD()
         {
             var productosBD = _productoRepository.GetAllProductos();
-            ListaProductos = new ObservableCollection<Producto>(productosBD);
+            ListaProductos.Clear();
+            foreach (var p in productosBD)
+            {
+                ListaProductos.Add(p);
+            }
+
         }
 
         private void GuardarProducto(object obj)
@@ -149,11 +171,32 @@ namespace Tienda_Abarrotes.ViewModel
         {
             if (obj is Producto p && p.Cantidad > 0)
             {
-               
-                double precioSimulado = 15.50;
-                Total += (p.Cantidad * precioSimulado);
+                double precioProducto = 15.50;
+
+                // CAMBIO: En lugar de llamar al otro ViewModel, agrégalo a la lista de ESTE ViewModel
+                var itemExistente = _carritoProductos.FirstOrDefault(x => x.Nombre == p.Nombre);
+                if (itemExistente != null)
+                {
+                    itemExistente.Cantidad += p.Cantidad;
+                }
+                else
+                {
+                    _carritoProductos.Add(new Producto
+                    {
+                        Nombre = p.Nombre,
+                        Cantidad = p.Cantidad,
+                        Stock = p.Stock,
+                        Imagen = p.Imagen
+                    });
+                }
+
+                Total += (p.Cantidad * precioProducto);
                 p.Cantidad = 0;
+                MessageBox.Show("Producto añadido al carrito");
+
+
             }
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

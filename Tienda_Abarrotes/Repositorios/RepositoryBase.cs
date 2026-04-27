@@ -16,15 +16,14 @@ namespace Tienda_Abarrotes.Repositorios
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
             // TU IP + INSTANCIA
-            builder.DataSource = "localhost, 1433";
+            builder.DataSource = "YAIR-ESP\\VSGESTION";
 
             // Nombre de la base de datos en tu compu
             builder.InitialCatalog = "Tienda_Abarrotes_BD";
 
             // LOS DATOS DEL USUARIO QUE CREASTE
-            builder.IntegratedSecurity = false; // IMPORTANTE: Debe ser false
-            builder.UserID = "usuario_equipo";
-            builder.Password = "Abarrotes2026";
+            builder.IntegratedSecurity = true; // IMPORTANTE: Debe ser false
+            
 
             // Configuraciones extra para evitar errores de red escolar
             builder.Encrypt = false;
