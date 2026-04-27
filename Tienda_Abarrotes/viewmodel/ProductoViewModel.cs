@@ -1,26 +1,30 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using Microsoft.Win32; // <-- MUY IMPORTANTE PARA QUE FUNCIONE OpenFileDialog
 using Tienda_Abarrotes.Model;
 using Tienda_Abarrotes.Repositorios;
 using System.Linq;
+
 
 namespace Tienda_Abarrotes.ViewModel
 {
     public class ProductoViewModel : INotifyPropertyChanged
     {
         private readonly IProductoRepository _productoRepository;
-
-        private static ObservableCollection<Producto> _listaProductos;
+        // --- MEMORIA COMPARTIDA ---
+        // Esto es vital para que la ventana de Agregar, Mostrar y Eliminar vean los mismos datos
+        private static ObservableCollection<Producto> _listaProductos;      
         public ObservableCollection<Producto> ListaProductos
         {
             get { return _listaProductos; }
             set { _listaProductos = value; OnPropertyChanged(nameof(ListaProductos)); }
         }
+
 
 
         // <-- para el carrito 
@@ -30,6 +34,7 @@ namespace Tienda_Abarrotes.ViewModel
             get { return _carritoProductos; }
             set { _carritoProductos = value; OnPropertyChanged(nameof(CarritoProductos)); }
         }
+
 
 
 
@@ -61,6 +66,7 @@ namespace Tienda_Abarrotes.ViewModel
             set { _rutaImagen = value; OnPropertyChanged(nameof(RutaImagen)); }
         }
 
+        // --- PROPIEDADES DEL CARRITO ---
         private double total;
         public double Total
         {
@@ -72,22 +78,27 @@ namespace Tienda_Abarrotes.ViewModel
             }
         }
 
+        // --- COMANDOS UNIFICADOS ---
         public ICommand SeleccionarImagenCommand { get; }
         public ICommand GuardarProductoCommand { get; }
         public ICommand SumarCommand { get; }
         public ICommand RestarCommand { get; }
         public ICommand AgregarCarritoCommand { get; }
 
+        // --- CONSTRUCTOR ---
         public ProductoViewModel()
         {
+
 
             // <-- para el carrito 
             if (_listaProductos == null) _listaProductos = new ObservableCollection<Producto>();
             if (_carritoProductos == null) _carritoProductos = new ObservableCollection<Producto>();
 
-            _productoRepository = new ProductoRepository();
-            CargarProductosBD();
 
+            _productoRepository = new ProductoRepository();
+            CargarProductosBD();         
+
+            // Enlace de los comandos con sus respectivos métodos
             GuardarProductoCommand = new RelayCommand(GuardarProducto);
             SeleccionarImagenCommand = new RelayCommand(SeleccionarImagen);
             SumarCommand = new RelayCommand(Sumar);
@@ -95,19 +106,21 @@ namespace Tienda_Abarrotes.ViewModel
             AgregarCarritoCommand = new RelayCommand(Agregar);
         }
 
+        // --- LÓGICA DE MÉTODOS ---
+
+        // Método para agregar al inventario
         private void SeleccionarImagen(object obj)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Seleccionar imagen del producto";
-            dialog.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png";
-
+            dialog.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png"; // Solo permitir formatos comunes de imagen
+            // Esto mustra una imgaen de vista previa, después de que el usuario haya cargado una imagen
             if (dialog.ShowDialog() == true)
             {
-                RutaImagen = dialog.FileName; // Guardamos la ruta absoluta real
+                RutaImagen = dialog.FileName;
             }
         }
-
-        private void CargarProductosBD()
+         private void CargarProductosBD()
         {
             var productosBD = _productoRepository.GetAllProductos();
             ListaProductos.Clear();
@@ -117,7 +130,6 @@ namespace Tienda_Abarrotes.ViewModel
             }
 
         }
-
         private void GuardarProducto(object obj)
         {
             byte[] imagenBytes = null;
@@ -143,17 +155,29 @@ namespace Tienda_Abarrotes.ViewModel
 
             CargarProductosBD();
 
-           
+
             Nombre = string.Empty;
             Stock = 0;
             Codigo = string.Empty;
             RutaImagen = null;
         }
 
+        public void EliminarProductosSeleccionados(List<Producto> productosAEliminar)
+        {
+            foreach (var producto in productosAEliminar)
+            {
+                // Consulta a la BD y ejecuta el DELETE usando el Id del producto
+                _productoRepository.Delete(producto);
+            }
+
+            // Recarga la lista desde la base de datos para que la tabla en pantalla se actualice
+            CargarProductosBD();
+        }
+
+        // Métodos para el punto de venta/carrito
         private void Sumar(object obj)
         {
-        
-            if (obj is Producto p && p.Cantidad < p.Stock)
+            if (obj is Producto p&& p.Cantidad < p.Stock)
             {
                 p.Cantidad++;
             }
@@ -190,15 +214,17 @@ namespace Tienda_Abarrotes.ViewModel
                     });
                 }
 
-                Total += (p.Cantidad * precioProducto);
+                Total += (p.Cantidad);
+
                 p.Cantidad = 0;
-                MessageBox.Show("Producto añadido al carrito");
+                
 
 
             }
 
         }
 
+        
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
