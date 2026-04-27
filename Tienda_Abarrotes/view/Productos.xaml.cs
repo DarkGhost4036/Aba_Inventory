@@ -1,9 +1,8 @@
-﻿using AbaInventory.ViewModel;
+﻿using Tienda_Abarrotes.ViewModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using Tienda_Abarrotes.ViewModel;
 
 namespace Tienda_Abarrotes.View
 {
