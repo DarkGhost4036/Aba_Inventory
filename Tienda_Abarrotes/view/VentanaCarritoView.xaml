@@ -4,8 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tienda_Abarrotes.View"
+        xmlns:vm="clr-namespace:Tienda_Abarrotes.ViewModel" 
         mc:Ignorable="d"
-        Title="VentanaCarritoView" Height="450" Width="800">
+        Title="Carrito de Compras - Aba Inventory" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -15,22 +18,27 @@
 
         <TextBlock Text="Resumen de Venta" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding ItemsCarrito}" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="1" 
+                  ItemsSource="{Binding Path=(vm:ProductoViewModel.CarritoProductos)}" 
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Producto" Binding="{Binding Nombre}" Width="*"/>
-                <DataGridTextColumn Header="Cant" Binding="{Binding Cantidad}" Width="60"/>
-                <DataGridTextColumn Header="Precio" Binding="{Binding Precio, StringFormat={}{0:C}}"/>
-                <DataGridTextColumn Header="Subtotal" Binding="{Binding Subtotal, StringFormat={}{0:C}}"/>
+                <DataGridTextColumn Header="Cant" Binding="{Binding Cantidad}" Width="80"/>
+
+                <DataGridTextColumn Header="Precio" Binding="{Binding Precio, StringFormat={}{0:C}}" Width="100"/>
+
+                <DataGridTextColumn Header="Subtotal" Binding="{Binding Subtotal, StringFormat={}{0:C}}" Width="120"/>
             </DataGrid.Columns>
         </DataGrid>
 
         <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,20,0,0">
-            <TextBlock Text="{Binding TotalAPagar, StringFormat='Total a cobrar: {0:C}'}" 
-                   FontSize="28" Foreground="#27ae60" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Path=(vm:ProductoViewModel.Total), StringFormat='Total a cobrar: {0:C}'}" 
+                       FontSize="28" Foreground="#27ae60" FontWeight="Bold"/>
 
             <Button Content="Confirmar Venta y Cobrar" 
-                Command="{Binding FinalizarVentaCommand}"
-                Background="#27ae60" Foreground="White" Padding="15,10" Margin="0,10,0,0"/>
+                    Command="{Binding FinalizarVentaCommand}"
+                    Background="#27ae60" Foreground="White" Padding="15,10" Margin="0,10,0,0"/>
         </StackPanel>
     </Grid>
 </Window>
