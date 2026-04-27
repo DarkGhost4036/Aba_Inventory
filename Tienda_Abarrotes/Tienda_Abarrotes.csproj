@@ -66,6 +66,7 @@
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Model\IUserRepository.cs" />
     <Compile Include="Repositorios\DatabaseConnectionTester.cs" />
+    <Compile Include="Repositorios\ProductoRepository.cs" />
     <Compile Include="Repositorios\RepositoryBase.cs" />
     <Compile Include="Repositorios\UserRepository.cs" />
     <Compile Include="Repositorios\UsuarioRepository.cs" />
