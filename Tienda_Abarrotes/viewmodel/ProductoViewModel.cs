@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -133,6 +134,7 @@ namespace Tienda_Abarrotes.ViewModel
                 rutaFinalBD = "/Images/" + nombreUnico;
             }
 
+
             Producto nuevoProducto = new Producto
             {
                 Nombre = this.Nombre,
@@ -152,6 +154,18 @@ namespace Tienda_Abarrotes.ViewModel
             Stock = 0;
             Codigo = string.Empty;
             RutaImagen = null;
+        }
+
+        public void EliminarProductosSeleccionados(List<Producto> productosAEliminar)
+        {
+            foreach (var producto in productosAEliminar)
+            {
+                // Consulta a la BD y ejecuta el DELETE usando el Id del producto
+                _productoRepository.Delete(producto);
+            }
+
+            // Recarga la lista desde la base de datos para que la tabla en pantalla se actualice
+            CargarProductosBD();
         }
 
         // Métodos para el punto de venta/carrito
