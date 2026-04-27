@@ -59,7 +59,7 @@
                         <TextBlock Text="Nombre de Producto*" FontWeight="SemiBold"/>
                         <TextBox x:Name="txtNombre" Text="{Binding Nombre, UpdateSourceTrigger=PropertyChanged}" Height="35" Margin="0,5,0,15"/>
 
-                        <TextBlock Text="Código de Producto*" FontWeight="SemiBold"/>
+                        <TextBlock Text="Categoría*" FontWeight="SemiBold"/>
                         <TextBox x:Name="txtCodigo" Text="{Binding Codigo, UpdateSourceTrigger=PropertyChanged}" Height="35" Margin="0,5,0,15"/>
                     </StackPanel>
 
