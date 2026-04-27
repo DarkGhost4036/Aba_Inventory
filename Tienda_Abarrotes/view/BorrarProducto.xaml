@@ -38,9 +38,7 @@
                 Click="btnInicio_Click"/>
                 <Button Content="Productos" Margin="10"
         Click="btnProductos_Click"/>
-                <Button Content="Categorias" Margin="10"/>
-                <Button Content="Finanzas" Margin="10"/>
-                <Button Content="Configuración" Margin="10"/>
+                
                 <Button Content="Gestion de Usuarios" Margin="10"
         Click="btnManejadorUsuarios_Click"/>
                 <Button x:Name="BtnAgregarLateral" Content="+ Agregar Producto" Background="#2ECC71" 

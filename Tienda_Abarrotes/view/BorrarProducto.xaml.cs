@@ -134,5 +134,10 @@ namespace Tienda_Abarrotes.View
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
