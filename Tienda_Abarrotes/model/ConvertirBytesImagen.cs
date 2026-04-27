@@ -19,6 +19,7 @@ namespace Tienda_Abarrotes.Model
                     mem.Position = 0;
                     image.BeginInit();
                     image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                    image.CacheOption = BitmapCacheOption.OnLoad;
                     image.StreamSource = mem;
                     image.EndInit();
                 }
