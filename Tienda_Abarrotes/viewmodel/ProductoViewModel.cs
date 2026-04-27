@@ -132,13 +132,32 @@ namespace Tienda_Abarrotes.ViewModel
         }
         private void GuardarProducto(object obj)
         {
-            byte[] imagenBytes = null;
-
-            // Si el usuario seleccionó una imagen y el archivo existe, lo convertimos a bytes directo
+            string rutaFinalBD = "/Imagen/default.png"; // Imagen por defecto en caso de que no se seleccione una imagen
+            // Cuando el usuario haya seleccionado una imagen, se copia a la carpeta "Images" del proyecto
             if (!string.IsNullOrEmpty(RutaImagen) && File.Exists(RutaImagen))
             {
-                imagenBytes = File.ReadAllBytes(RutaImagen);
+                // Se obtiene la ruta de la carpeta "Images"
+                string directorioProyecto = AppDomain.CurrentDomain.BaseDirectory;
+                string carpetaImages = Path.Combine(directorioProyecto, "Images");
+
+                // Si la carpeta "Images" no existe, entonces se crea
+                if (!Directory.Exists(carpetaImages))
+                {
+                    Directory.CreateDirectory(carpetaImages);
+                }
+
+                // Nombre único para evitar que imágenes con el mismo nombre choquen
+                string extension = Path.GetExtension(RutaImagen);
+                string nombreUnico = DateTime.Now.Ticks.ToString() + extension;
+                string rutaDestino = Path.Combine(carpetaImages, nombreUnico);
+
+                // Se copia el archivo
+                File.Copy(RutaImagen, rutaDestino);
+
+                // Esta es la ruta que se guardará en la base de datos
+                rutaFinalBD = "/Images/" + nombreUnico;
             }
+
 
             Producto nuevoProducto = new Producto
             {
@@ -146,7 +165,7 @@ namespace Tienda_Abarrotes.ViewModel
                 Stock = this.Stock,
                 Categoria = this.Codigo,
                 Estado = this.Stock > 0 ? "Activo" : "Agotado",
-                Imagen = imagenBytes, // Se van los bytes directos a la BD
+                Imagen = rutaFinalBD,
                 Tiendas = 1
             };
 
