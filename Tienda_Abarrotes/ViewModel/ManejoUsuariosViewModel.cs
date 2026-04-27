@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
@@ -12,6 +11,9 @@ namespace Tienda_Abarrotes.ViewModel
 {
     public class ManejoUsuariosViewModel : INotifyPropertyChanged
     {
+        // Usamos tu interfaz exactamente como la definiste
+        private readonly IUserRepository _userRepository;
+
         public ObservableCollection<UserModel> Users { get; set; }
 
         private UserModel _selectedUser;
@@ -25,40 +27,83 @@ namespace Tienda_Abarrotes.ViewModel
             }
         }
 
+        // Comandos CRUD
+        public ICommand AddCommand { get; }
         public ICommand DeleteCommand { get; }
-        public ICommand RefreshCommand { get; }
         public ICommand EditCommand { get; }
+        public ICommand RefreshCommand { get; }
 
         public ManejoUsuariosViewModel()
         {
-            // Inicialización de datos
-            Users = new ObservableCollection<UserModel>
-            {
-                new UserModel { Id=1, UserName="admin", Email="admin@tienda.com", Name="Juan", LastName="Pérez" },
-                new UserModel { Id=2, UserName="maria", Email="maria@tienda.com", Name="María", LastName="López" }
-            };
+            _userRepository = new UserRepository();
+            Users = new ObservableCollection<UserModel>();
 
-            // Implementación de comandos 
+            AddCommand = new RelayCommand(AddUser);
             DeleteCommand = new RelayCommand(DeleteUser);
             EditCommand = new RelayCommand(EditUser, CanEditUser);
-            RefreshCommand = new RelayCommand(obj => { /* Lógica para refrescar */ });
+            RefreshCommand = new RelayCommand(RefreshUsers);
+
+            CargarUsuariosDesdeBD();
         }
 
-        private void DeleteUser(object parameter)
+    
+
+        // 1. CONSULTAR
+        private void CargarUsuariosDesdeBD()
         {
-            if (parameter is UserModel user)
+            try
             {
-                var result = MessageBox.Show($"¿Eliminar al usuario {user.UserName}?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                if (result == MessageBoxResult.Yes)
+                Users.Clear();
+                var usuariosBD = _userRepository.GetAllUsers(); 
+
+                foreach (var user in usuariosBD)
                 {
-                    Users.Remove(user);
+                    Users.Add(user);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar usuarios: {ex.Message}", "Error de Base de Datos", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
+        private void RefreshUsers(object parameter)
+        {
+            CargarUsuariosDesdeBD();
+        }
+
+        // 2. GUARDAR
+        private void AddUser(object parameter)
+        {
+            View.RegistroView ventanaRegistro = new View.RegistroView();
+            ventanaRegistro.Show();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.DataContext == this)
+                {
+                    window.Close();
+                    break;
+                }
+            }
+
+        }
+
+        // 3. ACTUALIZAR
         private void EditUser(object parameter)
         {
-            MessageBox.Show("Cambios guardados correctamente.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (SelectedUser != null)
+            {
+                try
+                {
+                    _userRepository.Update(SelectedUser); // Actualizado a tu método Update
+                    MessageBox.Show("Cambios guardados correctamente.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                    CargarUsuariosDesdeBD();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al actualizar el usuario: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private bool CanEditUser(object parameter)
@@ -66,25 +111,34 @@ namespace Tienda_Abarrotes.ViewModel
             return SelectedUser != null;
         }
 
+        // 4. ELIMINAR
+        private void DeleteUser(object parameter)
+        {
+            // Tu método Delete pide el modelo completo, así que se lo pasamos
+            if (parameter is UserModel user)
+            {
+                var result = MessageBox.Show($"¿Estás seguro de eliminar al usuario {user.UserName}?", "Confirmar Eliminación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        _userRepository.Delete(user); // Actualizado a tu método Delete
+                        Users.Remove(user);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al eliminar el usuario: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+        }
+
+        // --- INotifyPropertyChanged ---
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-        private void CargarUsuariosDesdeBD()
-        {
-
-            Users.Clear(); // Limpiamos la lista 
-            IUserRepository repo = new UserRepository();
-            var UsuariosBD = repo.GetAllUsers();
-            foreach(var user in UsuariosBD)
-            {
-                Users.Add(user);
-            }
-        }
-                                      
-                
-
-        
     }
 }
