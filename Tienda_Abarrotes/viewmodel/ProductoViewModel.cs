@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.Win32; // <-- MUY IMPORTANTE PARA QUE FUNCIONE OpenFileDialog
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using Microsoft.Win32; // <-- MUY IMPORTANTE PARA QUE FUNCIONE OpenFileDialog
 using Tienda_Abarrotes.Model;
 using Tienda_Abarrotes.Repositorios;
 
@@ -128,6 +129,17 @@ namespace Tienda_Abarrotes.ViewModel
             RutaImagen = null;
         }
 
+        public void EliminarProductosSeleccionados(List<Producto> productosAEliminar)
+        {
+            foreach (var producto in productosAEliminar)
+            {
+                // Consulta a la BD y ejecuta el DELETE usando el Id del producto
+                _productoRepository.Delete(producto);
+            }
+
+            // Recarga la lista desde la base de datos para que la tabla en pantalla se actualice
+            CargarProductosBD();
+        }
         private void Sumar(object obj)
         {
         

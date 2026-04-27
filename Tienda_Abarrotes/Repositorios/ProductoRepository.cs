@@ -24,7 +24,6 @@ namespace Tienda_Abarrotes.Repositorios
                 command.Parameters.AddWithValue("@Stock", producto.Stock);
                 command.Parameters.AddWithValue("@Categoria", producto.Categoria);
 
-                // CORRECCIÓN 1: Aquí ya está la línea explícita para el VARBINARY
                 command.Parameters.Add("@Imagen", System.Data.SqlDbType.VarBinary).Value =
                     (producto.Imagen != null && producto.Imagen.Length > 0) ? (object)producto.Imagen : DBNull.Value;
 
@@ -68,7 +67,7 @@ namespace Tienda_Abarrotes.Repositorios
                 command.Parameters.AddWithValue("@Stock", producto.Stock);
                 command.Parameters.AddWithValue("@Estado", producto.Estado);
 
-                // Este lo habías puesto perfecto
+             
                 command.Parameters.Add("@Imagen", System.Data.SqlDbType.VarBinary).Value =
                     (producto.Imagen != null && producto.Imagen.Length > 0) ? (object)producto.Imagen : DBNull.Value;
 
@@ -95,7 +94,7 @@ namespace Tienda_Abarrotes.Repositorios
                             Stock = Convert.ToInt32(reader["Stock"]),
                             Estado = reader["Estado"].ToString(),
 
-                            // CORRECCIÓN 2: En el SELECT sacamos la imagen del 'reader'
+                           
                             Imagen = reader["Imagen"] != DBNull.Value ? (byte[])reader["Imagen"] : null
                         });
                     }

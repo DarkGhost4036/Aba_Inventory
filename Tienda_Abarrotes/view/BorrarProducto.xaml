@@ -89,32 +89,32 @@
 
             <DataGrid Grid.Row="2" x:Name="ProductsGrid" AutoGenerateColumns="False" 
                       Background="White" BorderThickness="0" CanUserAddRows="False"
-                      RowHeight="60" GridLinesVisibility="None" IsReadOnly="False">
+                      RowHeight="60" GridLinesVisibility="None" IsReadOnly="False" SelectionChanged="ProductsGrid_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Header="Selección" Binding="{Binding IsSelected}" Width="60"/>
 
-                    <DataGridTemplateColumn Header="Imagen" Width="80">
+                    <DataGridTemplateColumn Header="Imagen">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImageUrl}" Height="45" Margin="5"/>
+                                <Image Source="{Binding Imagen}" Width="40" Height="40" Stretch="Uniform" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-
-                    <DataGridTextColumn Header="Nombre de producto" Binding="{Binding Name}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Nombre de producto" Binding="{Binding Nombre}" Width="*" IsReadOnly="True"/>
 
                     <DataGridTemplateColumn Header="Estado" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="#E8F0FE" CornerRadius="10" Padding="5,2" HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding Status}" Foreground="#1967D2" FontSize="11"/>
+                                    <TextBlock Text="{Binding Estado}" Foreground="#1967D2" FontSize="11"/>
                                 </Border>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
                     <DataGridTextColumn Header="Info existencias" Binding="{Binding Stock}" Width="120" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Categoria" Binding="{Binding Category}" Width="120" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Categoria" Binding="{Binding Categoria}" Width="120" IsReadOnly="True"/>
+                    
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
