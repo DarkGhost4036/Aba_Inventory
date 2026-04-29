@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
@@ -91,18 +92,33 @@ namespace Tienda_Abarrotes.ViewModel
         // 3. ACTUALIZAR
         private void EditUser(object parameter)
         {
-            if (SelectedUser != null)
+            if (SelectedUser == null) return;
+
+            // 1. VALIDAR DUPLICADOS PRIMERO
+            var userDuplicate = Users.Any(u => u.UserName.Equals(SelectedUser.UserName, StringComparison.OrdinalIgnoreCase) && u.Id != SelectedUser.Id);
+            if (userDuplicate)
             {
-                try
-                {
-                    _userRepository.Update(SelectedUser); // Actualizado a tu método Update
-                    MessageBox.Show("Cambios guardados correctamente.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
-                    CargarUsuariosDesdeBD();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error al actualizar el usuario: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                MessageBox.Show("El nombre de usuario ya está siendo usado por otra persona.", "Usuario Duplicado", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; // Detiene el proceso
+            }
+
+            var emailDuplicate = Users.Any(u => u.Email.Equals(SelectedUser.Email, StringComparison.OrdinalIgnoreCase) && u.Id != SelectedUser.Id);
+            if (emailDuplicate)
+            {
+                MessageBox.Show("Este correo electrónico ya está registrado en otra cuenta.", "Correo Duplicado", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; // Detiene el proceso
+            }
+
+            // 2. SI TODO ESTÁ BIEN, ACTUALIZAR
+            try
+            {
+                _userRepository.Update(SelectedUser);
+                MessageBox.Show("Cambios guardados correctamente.", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
+                CargarUsuariosDesdeBD();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al actualizar: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

@@ -21,7 +21,7 @@ namespace Tienda_Abarrotes.Repositorios
 
             // LOS DATOS DEL USUARIO QUE CREASTE
             builder.IntegratedSecurity = false; // IMPORTANTE: Debe ser false
-            builder.UserID = "usuario_equipo";
+            builder.UserID = "usuario_equipo";  
             builder.Password = "Abarrotes2026";
 
             // Configuraciones extra para evitar errores de red escolar
