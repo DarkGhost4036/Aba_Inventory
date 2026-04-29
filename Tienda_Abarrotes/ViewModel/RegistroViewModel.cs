@@ -83,10 +83,17 @@ namespace Tienda_Abarrotes.ViewModel
                 return;
             }
 
-            var existingUser = userRepository.GetByUserName(User.UserName);
-            if (existingUser != null)
+            var userExists = Users.Any(u => u.UserName.Equals(User.UserName, StringComparison.OrdinalIgnoreCase));
+            if (userExists)
             {
-                MessageBox.Show("Usuario duplicado");
+                MessageBox.Show("El nombre de usuario ya se encuentra registrado.", "Usuario Duplicado", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var emailExists = Users.Any(u => u.Email.Equals(User.Email, StringComparison.OrdinalIgnoreCase));
+            if (emailExists)
+            {
+                MessageBox.Show("Este correo electrónico ya está asociado a otra cuenta.", "Correo Duplicado", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

@@ -16,13 +16,12 @@ namespace Tienda_Abarrotes.ViewModel
         // 1. MEMORIA ESTÁTICA: Los datos viven aquí y no se borran al cerrar la ventana
         public static ObservableCollection<CarritoItem> _itemsCarritoEstaticos = new ObservableCollection<CarritoItem>();
 
-        // 2. PUENTE PARA XAML: El DataGrid se amarra a esta propiedad
+       
         public ObservableCollection<CarritoItem> ItemsCarrito
         {
             get => _itemsCarritoEstaticos;
         }
 
-        // 3. PROPIEDADES DE INTERFAZ
         public double TotalAPagar => _itemsCarritoEstaticos.Sum(item => item.Subtotal);
 
         public ICommand FinalizarVentaCommand { get; }

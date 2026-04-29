@@ -98,5 +98,17 @@ namespace Tienda_Abarrotes.View
             image.Freeze(); 
             return image;
         }
+
+        private void dataGridProductos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoginView ventana = new LoginView();
+            ventana.Show();
+            this.Close();
+        }
     }
 }

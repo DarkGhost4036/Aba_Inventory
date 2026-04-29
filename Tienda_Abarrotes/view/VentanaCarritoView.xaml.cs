@@ -12,6 +12,11 @@ namespace Tienda_Abarrotes.View
             this.DataContext = new CarritoViewModel();
         }
 
-
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Productos ventana = new Productos();
+            ventana.Show();
+            this.Close();
+        }
     }
 }

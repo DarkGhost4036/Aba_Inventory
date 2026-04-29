@@ -1,6 +1,4 @@
 ﻿using System.Data.SqlClient;
-
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +13,7 @@ namespace Tienda_Abarrotes.Repositorios
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
-            // TU IP + INSTANCIA
+          
             builder.DataSource = "localhost, 1433";
 
             // Nombre de la base de datos en tu compu
@@ -23,7 +21,7 @@ namespace Tienda_Abarrotes.Repositorios
 
             // LOS DATOS DEL USUARIO QUE CREASTE
             builder.IntegratedSecurity = false; // IMPORTANTE: Debe ser false
-            builder.UserID = "usuario_equipo";
+            builder.UserID = "usuario_equipo";  
             builder.Password = "Abarrotes2026";
 
             // Configuraciones extra para evitar errores de red escolar

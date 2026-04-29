@@ -27,20 +27,14 @@
                            Margin="20"
                            FontWeight="Bold"/>
 
-                <Button Content="Inicio" Margin="10"
-                        Click="btnInicio_Click"/>
+               
 
                 <Button Content="Productos" Margin="10"
                         Click="btnProductos_Click"/>
 
-                <Button Content="Categorias" Margin="10"
-                        Click="btnCategorias_Click"/>
+               
 
-                <Button Content="Finanzas" Margin="10"
-                        Click="btnFinanzas_Click"/>
-
-                <Button Content="Configuración" Margin="10"
-                        Click="btnConfiguración_Click"/>
+               
 
                 <Button Content="Gestion de Usuarios" Margin="10"
                         Click="btnManejadorUsuarios_Click"/>
@@ -63,7 +57,7 @@
             </StackPanel>
 
             <StackPanel VerticalAlignment="Bottom" Margin="10,0,0,15">
-                <Button Content="Log out" Foreground="White" Background="Transparent" BorderThickness="0" Cursor="Hand"/>
+                <Button Content="Cerrar sesión" Foreground="White" Background="Transparent" BorderThickness="0" Cursor="Hand" Click="Button_Click"/>
             </StackPanel>
         </Grid>
 
@@ -116,7 +110,7 @@
                       RowHeight="60"
                       CanUserAddRows="False"
                       Background="White"
-                      BorderThickness="0">
+                      BorderThickness="0" SelectionChanged="dataGridProductos_SelectionChanged">
 
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Imagen" Width="100">

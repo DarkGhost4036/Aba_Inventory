@@ -13,11 +13,7 @@
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Aba-Inventory" Foreground="White" FontSize="20" Margin="10,20,10,20" FontWeight="Bold" HorizontalAlignment="Center"/>
 
-                <Button Content="Inicio" Margin="10"/>
                 <Button Content="Productos" Margin="10" Click="btnProductos_Click"/>
-                <Button Content="Categorias" Margin="10"/>
-                <Button Content="Finanzas" Margin="10"/>
-                <Button Content="Configuración" Margin="10" Click="btnConfiguracion_Click"/>
                 <Button Content="Gestion de Usuarios" Margin="10" Click="btnManejadorUsuarios_Click"/>
                 <Button Content="+ Agregar Producto" Background="#1BBF4C" Foreground="White" Margin="10,20,10,10" 
                         Height="40" FontSize="15" FontWeight="Bold">
@@ -41,7 +37,7 @@
             </StackPanel>
 
             <StackPanel VerticalAlignment="Bottom" Margin="10,0,0,15">
-                <Button Content="Salida" Foreground="White" Background="Transparent" BorderThickness="0" Cursor="Hand"/>
+                <Button Content="Cerrar Sesión" Foreground="White" Background="Transparent" BorderThickness="0" Cursor="Hand" Click="Button_Click"/>
             </StackPanel>
         </Grid>
 
@@ -56,15 +52,15 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                        <TextBlock Text="Nombre de Producto*" FontWeight="SemiBold"/>
+                        <TextBlock Text="Nombre del Producto" FontWeight="SemiBold"/>
                         <TextBox x:Name="txtNombre" Text="{Binding Nombre, UpdateSourceTrigger=PropertyChanged}" Height="35" Margin="0,5,0,15"/>
 
-                        <TextBlock Text="Categoría*" FontWeight="SemiBold"/>
+                        <TextBlock Text="Marca del producto" FontWeight="SemiBold"/>
                         <TextBox x:Name="txtCodigo" Text="{Binding Codigo, UpdateSourceTrigger=PropertyChanged}" Height="35" Margin="0,5,0,15"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                        <TextBlock Text="Tamaño de existencias*" FontWeight="SemiBold"/>
+                        <TextBlock Text="Cantidad de existencias" FontWeight="SemiBold"/>
                         <TextBox x:Name="txtStock" Text="{Binding Stock, UpdateSourceTrigger=PropertyChanged}" Height="35" Margin="0,0,0,20" VerticalContentAlignment="Center" Padding="5,0"/>
 
                         <TextBlock Text="Imagen del Producto" FontWeight="SemiBold"/>
