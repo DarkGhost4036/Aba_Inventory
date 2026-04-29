@@ -23,7 +23,7 @@
                 <TextBlock Text="Resumen de Venta" FontSize="24" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
 
                 <Button Content="Regresar" 
-                        Click="Button_Click"  
+                        Click="btnRegresar_Click"  
                         Background="DarkRed" 
                         Foreground="White" 
                         Width="120" 
@@ -34,7 +34,7 @@
         </Border>
 
         <DataGrid Grid.Row="1" 
-                  ItemsSource="{Binding Path=(vm:ProductoViewModel.CarritoProductos)}" 
+                  ItemsSource="{Binding ItemsCarrito}" 
                   AutoGenerateColumns="False" 
                   IsReadOnly="True"
                   Background="Snow">
@@ -48,7 +48,7 @@
 
         <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,20,0,0">
 
-            <TextBlock Text="{Binding Path=(vm:ProductoViewModel.Total), StringFormat='Total a cobrar: {0:C}'}" 
+            <TextBlock Text="{Binding TotalAPagar, StringFormat='Total a cobrar: {0:C}'}" 
                        FontSize="28" Foreground="White" FontWeight="Bold" HorizontalAlignment="Right"/>
 
             <Button Content="Confirmar Venta y Cobrar" 

@@ -89,12 +89,33 @@ namespace Tienda_Abarrotes.ViewModel
             }
         }
 
+        private Producto _productoSeleccionado;
+        public Producto ProductoSeleccionado
+        {
+            get { return _productoSeleccionado; }
+            set
+            {
+                _productoSeleccionado = value;
+                OnPropertyChanged(nameof(ProductoSeleccionado));
+
+                // Cuando el usuario selecciona uno, se cargan los datos de ese producto en los campos de texto
+                if (_productoSeleccionado != null)
+                {
+                    Nombre = _productoSeleccionado.Nombre;
+                    Stock = _productoSeleccionado.Stock;
+                    Precio = _productoSeleccionado.Precio;
+                    Codigo = _productoSeleccionado.Categoria;
+                }
+            }
+        }
+
         // --- COMANDOS UNIFICADOS ---
         public ICommand SeleccionarImagenCommand { get; }
         public ICommand GuardarProductoCommand { get; }
         public ICommand SumarCommand { get; }
         public ICommand RestarCommand { get; }
         public ICommand AgregarCarritoCommand { get; }
+        public ICommand ActualizarProductoCommand { get; }
 
         // --- CONSTRUCTOR ---
         public ProductoViewModel()
@@ -115,6 +136,7 @@ namespace Tienda_Abarrotes.ViewModel
             SumarCommand = new RelayCommand(Sumar);
             RestarCommand = new RelayCommand(Restar);
             AgregarCarritoCommand = new RelayCommand(Agregar);
+            ActualizarProductoCommand = new RelayCommand(ActualizarProducto);
         }
 
         // --- LÓGICA DE MÉTODOS ---
@@ -207,37 +229,50 @@ namespace Tienda_Abarrotes.ViewModel
         private void Agregar(object obj)
         {
             if (obj is Producto p && p.Cantidad > 0)
-            {
-                double precioProducto = 15.50;
+            {                
+                var itemExistente = CarritoViewModel._itemsCarritoEstaticos.FirstOrDefault(x => x.Nombre == p.Nombre);
 
-                // CAMBIO: En lugar de llamar al otro ViewModel, agrégalo a la lista de ESTE ViewModel
-                var itemExistente = _carritoProductos.FirstOrDefault(x => x.Nombre == p.Nombre);
                 if (itemExistente != null)
                 {
                     itemExistente.Cantidad += p.Cantidad;
                 }
                 else
                 {
-                    _carritoProductos.Add(new Producto
+                    // Se crea y agrega un Producto a la lista del carrito
+                    CarritoViewModel._itemsCarritoEstaticos.Add(new Producto
                     {
                         Nombre = p.Nombre,
                         Cantidad = p.Cantidad,
-                        Stock = p.Stock,
-                        Imagen = p.Imagen
+                        Precio = p.Precio
                     });
                 }
 
-                Total += (p.Cantidad);
-
                 p.Cantidad = 0;
-                
-
-
+                MessageBox.Show($"{p.Nombre} agregado al carrito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
         }
 
-        
+        private void ActualizarProducto(object obj)
+        {
+            if (ProductoSeleccionado == null) 
+            {
+                MessageBox.Show("Porfavor, selecciona un producto primero. ", "Aviso", MessageBoxButton.OK, MessageBoxImage.Warning); ");
+            }            
+
+            // Se actualizan los datos del objeto seleccionado con lo que hay en los TextBox
+            ProductoSeleccionado.Nombre = this.Nombre;
+            ProductoSeleccionado.Stock = this.Stock;
+            ProductoSeleccionado.Precio = this.Precio;
+            ProductoSeleccionado.Categoria = this.Codigo;
+            ProductoSeleccionado.Estado = this.Stock > 0 ? "Activo" : "Agotado";
+
+            // Se hace llamada al repositorio
+            _productoRepository.Update(ProductoSeleccionado);
+            MessageBox.Show("¡Producto actualizado correctamente!");
+            CargarProductosBD(); // Refrescar la lista
+        }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

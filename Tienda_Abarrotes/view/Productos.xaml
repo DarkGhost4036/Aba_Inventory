@@ -106,6 +106,7 @@
             <DataGrid x:Name="dataGridProductos"
                       Grid.Row="1"
                       ItemsSource="{Binding ListaProductos}"
+                      SelectedItem="{Binding ProductoSeleccionado}"
                       AutoGenerateColumns="False"
                       RowHeight="60"
                       CanUserAddRows="False"

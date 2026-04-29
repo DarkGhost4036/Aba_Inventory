@@ -24,9 +24,14 @@ namespace Tienda_Abarrotes.Model
             set
             {
                 cantidad = value;
-                OnPropertyChanged(nameof(Cantidad));
+                // Valores que cambiarán en la pantalla
+                OnPropertyChanged(nameof(Cantidad));                
+                OnPropertyChanged(nameof(Subtotal));
             }
         }
+
+        // Propiedad que calcula el subtotal en automático
+        public decimal Subtotal => Cantidad * Precio;
 
         // --- Contructores ---
         public Producto() { }

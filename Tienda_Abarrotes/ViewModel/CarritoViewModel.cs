@@ -14,15 +14,15 @@ namespace Tienda_Abarrotes.ViewModel
     public class CarritoViewModel : INotifyPropertyChanged
     {
         // 1. MEMORIA ESTÁTICA: Los datos viven aquí y no se borran al cerrar la ventana
-        public static ObservableCollection<CarritoItem> _itemsCarritoEstaticos = new ObservableCollection<CarritoItem>();
+        public static ObservableCollection<Producto> _itemsCarritoEstaticos = new ObservableCollection<Producto>();
 
        
-        public ObservableCollection<CarritoItem> ItemsCarrito
+        public ObservableCollection<Producto> ItemsCarrito
         {
             get => _itemsCarritoEstaticos;
         }
 
-        public double TotalAPagar => _itemsCarritoEstaticos.Sum(item => item.Subtotal);
+        public decimal TotalAPagar => _itemsCarritoEstaticos.Sum(item => item.Subtotal);
 
         public ICommand FinalizarVentaCommand { get; }
 

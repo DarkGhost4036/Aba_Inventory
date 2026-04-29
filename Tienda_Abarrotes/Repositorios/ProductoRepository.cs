@@ -58,9 +58,9 @@ namespace Tienda_Abarrotes.Repositorios
                                         SET Nombre = @Nombre,
                                             Estado = @Estado,
                                             Stock = @Stock, 
-                                            Categoria = @Categoria,                                                               
-                                            Imagen = @Imagen
-                                            Precio = @Precio
+                                            Categoria = @Categoria,    
+                                            Precio = @Precio,
+                                            Imagen = @Imagen                                            
                                         WHERE Id = @Id";
 
                 command.Parameters.AddWithValue("@Id", producto.Id);
