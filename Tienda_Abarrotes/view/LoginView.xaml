@@ -12,22 +12,22 @@
         WindowStartupLocation="CenterScreen"
         Background="Black"
         AllowsTransparency="True">
-	
+
     <Window.DataContext>
         <viewModel:LoginViewModel/>
     </Window.DataContext>
-	
+
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
     </Window.Resources>
     <Window.Visibility>
         <Binding Path="IsViewVisible" Mode="TwoWay"
-                    Converter="{StaticResource BooleanToVisibility}"/>
+                 Converter="{StaticResource BooleanToVisibility}"/>
     </Window.Visibility>
 
-        <Border CornerRadius="12">
+    <Border CornerRadius="12">
         <Border CornerRadius="5" BorderThickness="2"
-                Opacity="1" Margin="0 0 0 -44" Background="AliceBlue">
+                Opacity="1" Margin="0,0,0,-89" Background="AliceBlue">
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -47,70 +47,61 @@
                                Grid.Column="0"
                                VerticalAlignment="Center"
                                Margin="10,0,0,0"/>
+
                     <Button x:Name="btnMinimizar"
                             BorderThickness="0"
-                            Content="-"                         
-                            Foreground="White"
+                            Content="-"
+                            Foreground="Black"
                             FontSize="16"
                             Cursor="Hand"
-                            Grid.Column="1">
+                            Grid.Column="1"
+                            Click="btnMinimizar_Click" Height="30" VerticalAlignment="Top">
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background"
-                                        Value="Gray"/>
+                                <Setter Property="Background" Value="Gray"/>
                                 <Style.Triggers>
-                                    <Trigger Property="IsMouseOver"
-                                             Value="True">
-                                        <Setter Property="Background"
-                                                Value="LightGray"/>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="LightGray"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Width="18" Height="18"
-                                        CornerRadius="9"
-                                        Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center"
-                                                          HorizontalAlignment="Center"/>
+                                <Border Width="18" Height="18" CornerRadius="9" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
 
                     <Button x:Name="btnCerrar"
-                                BorderThickness="0"
-                                Content="X"
-                                Foreground="White"
-                                FontSize="16"
-                                Cursor="Hand"
-                                Grid.Column="2">
+                            BorderThickness="0"
+                            Content="X"
+                            Foreground="Black"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Click="btnCerrar_Click">
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background"
-                                        Value="Crimson"/>
+                                <Setter Property="Background" Value="Crimson"/>
                                 <Style.Triggers>
-                                    <Trigger Property="IsMouseOver"
-                                            Value="True">
-                                        <Setter Property="Background"
-                                                Value="Red"/>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Red"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Width="18" Height="18"
-                                        CornerRadius="9"
-                                        Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="center"
-                                                        HorizontalAlignment="Center"/>
+                                <Border Width="18" Height="18" CornerRadius="9" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
                 </Grid>
+
                 <StackPanel Width="300"
                             Grid.Row="1"
                             Orientation="Vertical"
@@ -146,35 +137,40 @@
                                         AlignmentX="Left"/>
                         </TextBox.Background>
                     </TextBox>
-                    <PasswordBox x:Name="txtPassword"
-                     PasswordChanged="txtPassword_PasswordChanged"
-                     Background="Transparent"
-                     FontSize="13"
-                     FontWeight="Medium"
-                     Foreground="Black"
-                     CaretBrush="LightGray"
-                     BorderBrush="DarkGray"
-                     BorderThickness="0,0,0,2"
-                     Height="40"
-                     VerticalContentAlignment="Center"
-                     Margin="0,5,0,0"
-                     Padding="20,0,0,0" />  
 
-                    <!-- Mensaje de error cuando se inicie mal la seción-->
+                    <TextBlock Text="Password"
+                               Foreground="Black"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               Margin="0,15,0,0"/>
+                    <PasswordBox x:Name="txtPassword"
+                                 PasswordChanged="txtPassword_PasswordChanged"
+                                 Background="Transparent"
+                                 FontSize="13"
+                                 FontWeight="Medium"
+                                 Foreground="Black"
+                                 CaretBrush="LightGray"
+                                 BorderBrush="DarkGray"
+                                 BorderThickness="0,0,0,2"
+                                 Height="40"
+                                 VerticalContentAlignment="Center"
+                                 Margin="0,5,0,0"
+                                 Padding="20,0,0,0" />
+
                     <TextBlock Text="{Binding ErrorMessage}"
                                Foreground= "#D7596D"
                                FontSize="12"
                                FontWeight="Medium"
                                Margin="0,10,0,0"
                                TextWrapping="Wrap"/>
-                    <!-- Botón para probar la conexión a la base de datos -->
+
                     <Button Content="Probar conexión a la base de datos"
-                        Command="{Binding TestConnectionCommand}"
-                        BorderThickness="0"
-                        Foreground="White"
-                        FontSize="14"
-                        Cursor="Hand"
-                        Margin="0,10,0,0">  
+                            Command="{Binding TestConnectionCommand}"
+                            BorderThickness="0"
+                            Foreground="White"
+                            FontSize="14"
+                            Cursor="Hand"
+                            Margin="0,10,0,0">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#1E90FF"/>
@@ -189,18 +185,18 @@
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Width="300"
-                                    Height="35"
-                                    CornerRadius="6"
-                                    Background="{TemplateBinding Background}">      
+                                        Height="35"
+                                        CornerRadius="6"
+                                        Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
-                                  HorizontalAlignment="Center"/>
+                                                      HorizontalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
+
                     <Button x:Name="btnLogin"
                             Command="{Binding LoginCommand}"
-                            CommandParameter="Binding ElementName=txtPassword"
                             BorderThickness="0"
                             Content="Iniciar sesión"
                             Foreground="White"
@@ -209,13 +205,10 @@
                             Grid.Column="2">
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background"
-                                        Value="#0F7A2F"/>
+                                <Setter Property="Background" Value="#0F7A2F"/>
                                 <Style.Triggers>
-                                    <Trigger Property="IsMouseOver"
-                                            Value="True">
-                                        <Setter Property="Background"
-                                                Value="#1BBF4C"/>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#1BBF4C"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -226,7 +219,7 @@
                                         CornerRadius="6" Margin="0 30 0 0"
                                         Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
-                                                    HorizontalAlignment="Center"/>
+                                                      HorizontalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
@@ -239,7 +232,7 @@
                             Foreground="White"
                             FontSize="14"
                             Cursor="Hand"
-                            Margin="0,10,0,0">      
+                            Margin="0,10,0,0">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#0F7A2F"/>
@@ -251,32 +244,31 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
-
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Width="300"
                                         Height="35"
                                         CornerRadius="6"
-                                        Background="{TemplateBinding Background}">  
+                                        Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
-                                  HorizontalAlignment="Center"/>
+                                                      HorizontalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
 
                     <Image Source="/Images/image_logins.png"
-                            Width="250"
-                            Height="150"
-                            HorizontalAlignment="Center"
-                           Margin="0 20 0 0"
-                            />
+                           Width="250"
+                           Height="150"
+                           HorizontalAlignment="Center"
+                           Margin="0 20 0 0" />
                 </StackPanel>
+
                 <StackPanel Width="320"
                             Grid.Row="1"
                             Orientation="Vertical"
                             Margin="475,0,0,0"
-                    Background="#0F7A2F">
+                            Background="#0F7A2F">
 
                     <TextBlock Foreground="White"
                                FontSize="15"
@@ -291,9 +283,8 @@
                         la vida para poder gestionar tus tiendas."
                     </TextBlock>
                     <Image Source="/Images/Aba_Inventory_icon.png"
-                            Width="150"
-                            Height="150"/>
-
+                           Width="150"
+                           Height="150"/>
                 </StackPanel>
             </Grid>
         </Border>

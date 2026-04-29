@@ -61,14 +61,12 @@ namespace Tienda_Abarrotes.View
             // Lógica de configuración pendiente
         }
 
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
+            LoginView ventana = new LoginView();
+            ventana.Show();
+            this.Close();
         }
     }
 }

@@ -137,7 +137,9 @@ namespace Tienda_Abarrotes.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            LoginView ventana = new LoginView();
+            ventana.Show();
+            this.Close();
         }
     }
 }

@@ -9,5 +9,11 @@ namespace Tienda_Abarrotes.View
             InitializeComponent();
             this.DataContext = new Tienda_Abarrotes.ViewModel.ManejoUsuariosViewModel();
         }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Productos ventana = new Productos();
+            ventana.Show();
+            this.Close();
+        }
     }
 }
