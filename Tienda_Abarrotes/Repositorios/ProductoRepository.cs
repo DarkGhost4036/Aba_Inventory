@@ -16,16 +16,17 @@ namespace Tienda_Abarrotes.Repositorios
                 command.Connection = connection;
 
                 command.CommandText = @"INSERT INTO Producto 
-                                        (Nombre, Estado, Stock, Categoria, Imagen)
-                                        VALUES (@Nombre, @Estado, @Stock, @Categoria, @Imagen)";
+                                        (Nombre, Estado, Stock, Categoria, Imagen, Precio)
+                                        VALUES (@Nombre, @Estado, @Stock, @Categoria, @Imagen, @Precio)";
 
                 command.Parameters.AddWithValue("@Nombre", producto.Nombre);
                 command.Parameters.AddWithValue("@Estado", producto.Estado);
                 command.Parameters.AddWithValue("@Stock", producto.Stock);
                 command.Parameters.AddWithValue("@Categoria", producto.Categoria);
-
+                command.Parameters.AddWithValue("@Precio", producto.Precio);
                 command.Parameters.Add("@Imagen", System.Data.SqlDbType.VarBinary).Value =
                     (producto.Imagen != null && producto.Imagen.Length > 0) ? (object)producto.Imagen : DBNull.Value;
+                
 
                 command.ExecuteNonQuery();
             }
@@ -58,7 +59,8 @@ namespace Tienda_Abarrotes.Repositorios
                                             Estado = @Estado,
                                             Stock = @Stock, 
                                             Categoria = @Categoria,                                                               
-                                            Imagen = @Imagen                                           
+                                            Imagen = @Imagen
+                                            Precio = @Precio
                                         WHERE Id = @Id";
 
                 command.Parameters.AddWithValue("@Id", producto.Id);
@@ -66,10 +68,10 @@ namespace Tienda_Abarrotes.Repositorios
                 command.Parameters.AddWithValue("@Categoria", producto.Categoria);
                 command.Parameters.AddWithValue("@Stock", producto.Stock);
                 command.Parameters.AddWithValue("@Estado", producto.Estado);
-
-             
+                command.Parameters.AddWithValue("@Precio", producto.Precio);
                 command.Parameters.Add("@Imagen", System.Data.SqlDbType.VarBinary).Value =
                     (producto.Imagen != null && producto.Imagen.Length > 0) ? (object)producto.Imagen : DBNull.Value;
+                
 
                 command.ExecuteNonQuery();
             }
@@ -93,8 +95,8 @@ namespace Tienda_Abarrotes.Repositorios
                             Categoria = reader["Categoria"].ToString(),
                             Stock = Convert.ToInt32(reader["Stock"]),
                             Estado = reader["Estado"].ToString(),
+                            Precio = reader["Precio"] != DBNull.Value ? Convert.ToDecimal(reader["Precio"]) : 0m,
 
-                           
                             Imagen = reader["Imagen"] != DBNull.Value ? (byte[])reader["Imagen"] : null
                         });
                     }

@@ -9,8 +9,8 @@ namespace Tienda_Abarrotes.Model
         public string Estado { get; set; }
         public int Stock { get; set; }
         public string Categoria { get; set; }
-        public byte[] Imagen { get; set; }
-        public int Tiendas { get; set; }
+        public decimal Precio { get; set; }
+        public byte[] Imagen { get; set; }     
         public bool IsSelected { get; set; }
 
        
@@ -28,19 +28,20 @@ namespace Tienda_Abarrotes.Model
             }
         }
 
-        // --- CONSTRUCTORES ---
+        // --- Contructores ---
         public Producto() { }
 
-        public Producto(string nombre, string categoria, int stock, string estado)
+        public Producto(string nombre, string categoria, int stock, string estado, decimal precio)
         {
             Nombre = nombre;
             Estado = estado;
             Stock = stock;
             Categoria = categoria;
+            Precio = precio;          
       
         }
 
-        // --- EVENTO DE NOTIFICACIÓN ---
+        // --- Evento de notificacion ---
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

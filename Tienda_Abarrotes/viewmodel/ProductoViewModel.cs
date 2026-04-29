@@ -59,6 +59,17 @@ namespace Tienda_Abarrotes.ViewModel
             set { _codigo = value; OnPropertyChanged(nameof(Codigo)); }
         }
 
+        private decimal _precio;
+        public decimal Precio
+        {
+            get { return _precio; }
+            set
+            {
+                _precio = value;
+                OnPropertyChanged(nameof(Precio));
+            }
+        }
+
         private string _rutaImagen;
         public string RutaImagen
         {
@@ -146,8 +157,9 @@ namespace Tienda_Abarrotes.ViewModel
                 Stock = this.Stock,
                 Categoria = this.Codigo,
                 Estado = this.Stock > 0 ? "Activo" : "Agotado",
+                Precio = this.Precio,
                 Imagen = imagenBytes, // Se van los bytes directos a la BD
-                Tiendas = 1
+                
             };
 
             _productoRepository.Add(nuevoProducto);
@@ -159,6 +171,7 @@ namespace Tienda_Abarrotes.ViewModel
             Nombre = string.Empty;
             Stock = 0;
             Codigo = string.Empty;
+            Precio = 0;
             RutaImagen = null;
         }
 
