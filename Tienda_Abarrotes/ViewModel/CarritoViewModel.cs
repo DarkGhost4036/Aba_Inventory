@@ -37,26 +37,7 @@ namespace Tienda_Abarrotes.ViewModel
                 OnPropertyChanged(nameof(TotalAPagar));
             };
         }
-
-        // 4. MÉTODOS DE LÓGICA
-        public static void AgregarAlCarritoEstatico(string nombreProducto, double precio, int cantidad)
-        {
-            var itemExistente = _itemsCarritoEstaticos.FirstOrDefault(i => i.NombreProducto == nombreProducto);
-            if (itemExistente != null)
-            {
-                itemExistente.Cantidad += cantidad;
-            }
-            else
-            {
-                _itemsCarritoEstaticos.Add(new CarritoItem
-                {
-                    NombreProducto = nombreProducto,
-                    Precio = precio,
-                    Cantidad = cantidad
-                });
-            }
-        }
-
+      
         private void FinalizarVenta(object obj)
         {
             if (_itemsCarritoEstaticos.Count == 0)
